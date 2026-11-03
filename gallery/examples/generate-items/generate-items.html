@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate a chosen quantity</title>
+    <link rel="stylesheet" href="generate-items.css">
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="generate-items.js" defer></script>
+</head>
+<body>
+    <label for="quantity">Quantity (1–12)</label>
+    <div class="controls">
+        <input id="quantity" type="number" min="1" max="12" step="1" value="4">
+        <button id="generate-button" type="button">Generate</button>
+    </div>
+    <p id="message" aria-live="polite"></p>
+    <div id="items" aria-live="polite"></div>
+</body>
+</html>

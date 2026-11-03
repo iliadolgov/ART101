@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15. Create an item from input · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>15. Create an item from input</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p>Add reads the label, creates a new list item, and appends it to the existing list. <code>.text()</code> keeps the label as literal text. A successful addition clears the field for the next item.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame content-frame" id="live-example" src="create-item.html" title="Live example: Create an item from input"></iframe>
+                <a class="demo-link" href="create-item.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">// .click(...) runs this function when the Add button is clicked.
+$(&quot;#add-button&quot;).click(function () {
+    // .val() reads the field; .trim() removes spaces at either end.
+    let label = $(&quot;#item-label&quot;).val().trim();
+
+    if (label == &quot;&quot;) {
+        $(&quot;#message&quot;).text(&quot;Enter a label.&quot;);
+    }
+    else {
+        // HTML inside $(...) creates a new element, not yet on the page.
+        let item = $(&quot;&lt;li&gt;&lt;/li&gt;&quot;);
+        // .text(...) sets its label literally, including &lt; and &gt;.
+        item.text(label);
+        // .append(...) adds it after the existing list items.
+        $(&quot;#items&quot;).append(item);
+        // Clear the field and return focus for the next item.
+        $(&quot;#item-label&quot;).val(&quot;&quot;);
+        $(&quot;#item-label&quot;).focus();
+        $(&quot;#message&quot;).text(&quot;&quot;);
+    }
+});</code></pre></div>
+                
+            </section>
+        </div>
+        <p class="change-suggestion">Try replacing <code>.append(item)</code> with <code>.prepend(item)</code> to place each new item first.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/create-item.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>create-item.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>create-item.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full create-item.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Create an item from input&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;create-item.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;create-item.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;label for=&quot;item-label&quot;&gt;Item label&lt;/label&gt;
+    &lt;div class=&quot;controls&quot;&gt;
+        &lt;input id=&quot;item-label&quot; type=&quot;text&quot; autocomplete=&quot;off&quot;&gt;
+        &lt;button id=&quot;add-button&quot; type=&quot;button&quot;&gt;Add&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;p id=&quot;message&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+    &lt;ul id=&quot;items&quot; aria-live=&quot;polite&quot;&gt;&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>create-item.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full create-item.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">* { box-sizing: border-box; }
+body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+p { line-height: 1.5; }
+label { display: block; margin-bottom: 8px; }
+button, input, select { font: inherit; }
+button {
+    padding: 10px 16px;
+    border: 1px solid #888;
+    background: #f7f7f5;
+    cursor: pointer;
+}
+input, select { padding: 10px; border: 1px solid #888; max-width: 100%; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; }
+#message { min-height: 24px; margin: 12px 0; }
+
+#item-label { width: 160px; }
+/* Long lists scroll inside the example. */
+#items { list-style: none; padding: 0; margin: 20px 0; max-height: 260px; overflow-y: auto; }
+#items li { margin-bottom: 8px; padding: 10px; border: 1px solid #ccc; background: #f7f7f5; overflow-wrap: anywhere; }</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>create-item.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full create-item.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">// .click(...) runs this function when the Add button is clicked.
+$(&quot;#add-button&quot;).click(function () {
+    // .val() reads the field; .trim() removes spaces at either end.
+    let label = $(&quot;#item-label&quot;).val().trim();
+
+    if (label == &quot;&quot;) {
+        $(&quot;#message&quot;).text(&quot;Enter a label.&quot;);
+    }
+    else {
+        // HTML inside $(...) creates a new element, not yet on the page.
+        let item = $(&quot;&lt;li&gt;&lt;/li&gt;&quot;);
+        // .text(...) sets its label literally, including &lt; and &gt;.
+        item.text(label);
+        // .append(...) adds it after the existing list items.
+        $(&quot;#items&quot;).append(item);
+        // Clear the field and return focus for the next item.
+        $(&quot;#item-label&quot;).val(&quot;&quot;);
+        $(&quot;#item-label&quot;).focus();
+        $(&quot;#message&quot;).text(&quot;&quot;);
+    }
+});</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

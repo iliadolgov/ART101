@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. Count actions and change the response · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>5. Count actions and change the response</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p>Each click adds one to <code>count</code>. The response changes when the count reaches <code>threshold</code> and stays changed as the count keeps growing.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame data-frame" id="live-example" src="count-actions.html" title="Live example: Count actions and change the response"></iframe>
+                <a class="demo-link" href="count-actions.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">// Outside the handler so the count is remembered between clicks.
+let count = 0;
+let threshold = 5;
+
+// .click(...) runs this function when #count-button is clicked.
+$(&quot;#count-button&quot;).click(function () {
+    // Add one before displaying or checking the updated count.
+    count = count + 1;
+    $(&quot;#count&quot;).text(count);
+
+    // &gt;= means greater than or equal to, so this also works past the threshold.
+    if (count &gt;= threshold) {
+        $(&quot;#result&quot;).text(&quot;Threshold reached.&quot;);
+    }
+    else {
+        $(&quot;#result&quot;).text(&quot;Below the threshold.&quot;);
+    }
+});</code></pre></div>
+                
+            </section>
+        </div>
+        <p class="change-suggestion">Try changing <code>threshold</code> from <code>5</code> to <code>3</code>.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/count-actions.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>count-actions.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>count-actions.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full count-actions.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Count actions and change the response&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;count-actions.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;count-actions.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p id=&quot;instruction&quot;&gt;&lt;/p&gt;
+    &lt;button id=&quot;count-button&quot; type=&quot;button&quot;&gt;Add 1&lt;/button&gt;
+    &lt;p class=&quot;count-line&quot;&gt;Count: &lt;span id=&quot;count&quot;&gt;0&lt;/span&gt;&lt;/p&gt;
+    &lt;p id=&quot;result&quot; aria-live=&quot;polite&quot;&gt;Below the threshold.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>count-actions.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full count-actions.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+p { line-height: 1.5; }
+button {
+    padding: 10px 16px;
+    border: 1px solid #888;
+    background: #f7f7f5;
+    font: inherit;
+    cursor: pointer;
+}
+.count-line { margin: 24px 0 16px; font-size: 24px; }
+#count { font-weight: bold; }
+#result { padding: 16px; border: 1px solid #ccc; background: #f7f7f5; }</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>count-actions.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full count-actions.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">// Outside the handler so the count is remembered between clicks.
+let count = 0;
+let threshold = 5;
+
+$(&quot;#instruction&quot;).text(&quot;The response changes at &quot; + threshold + &quot; clicks.&quot;);
+
+// .click(...) runs this function when #count-button is clicked.
+$(&quot;#count-button&quot;).click(function () {
+    // Add one before displaying or checking the updated count.
+    count = count + 1;
+    $(&quot;#count&quot;).text(count);
+
+    // &gt;= means greater than or equal to, so this also works past the threshold.
+    if (count &gt;= threshold) {
+        $(&quot;#result&quot;).text(&quot;Threshold reached.&quot;);
+    }
+    else {
+        $(&quot;#result&quot;).text(&quot;Below the threshold.&quot;);
+    }
+});</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

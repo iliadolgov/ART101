@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11. Check a combination · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>11. Check a combination</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p><code>selectedLetter</code> and <code>selectedNumber</code> remember one choice from each group. Clicking Check first checks that both have been chosen, then uses <code>&amp;&amp;</code> (AND) to test the pair. Changing either choice clears the old result until you check again.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame combination-frame" id="live-example" src="check-combination.html" title="Live example: Check a combination"></iframe>
+                <a class="demo-link" href="check-combination.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">// Each group remembers its own choice between clicks.
+let selectedLetter = &quot;&quot;;
+let selectedNumber = &quot;&quot;;
+
+// .click(...) runs this function when a .letter button is clicked.
+$(&quot;.letter&quot;).click(function () {
+    // $(this) is the clicked button; .text() reads its text.
+    selectedLetter = $(this).text();
+});
+
+$(&quot;.number&quot;).click(function () {
+    // This also reads text, so the saved number is &quot;1&quot; or &quot;2&quot;.
+    selectedNumber = $(this).text();
+});
+
+// Selecting changes the choices; clicking Check evaluates them together.
+$(&quot;#check-button&quot;).click(function () {
+    // || means OR: either missing choice needs attention.
+    if (selectedLetter == &quot;&quot; || selectedNumber == &quot;&quot;) {
+        $(&quot;#result&quot;).text(&quot;Choose one letter and one number.&quot;);
+    }
+    // &amp;&amp; means AND: both comparisons must be true for a match.
+    else if (selectedLetter == &quot;A&quot; &amp;&amp; selectedNumber == &quot;2&quot;) {
+        $(&quot;#result&quot;).text(&quot;A + 2 matches.&quot;);
+    }
+    else {
+        $(&quot;#result&quot;).text(selectedLetter + &quot; + &quot; + selectedNumber + &quot; does not match.&quot;);
+    }
+});</code></pre></div>
+            </section>
+        </div>
+        <p class="change-suggestion">Predict which of A + 1, A + 2, B + 1 and B + 2 match with AND, then OR. Change only the matching condition’s <code>&amp;&amp;</code> to <code>||</code>; keep the missing-choice check. For this experiment, make the success message <code>selectedLetter + " + " + selectedNumber + " matches."</code> and update the instruction to describe the rule. Compare all four results with your predictions.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/check-combination.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>check-combination.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>check-combination.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full check-combination.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Check a combination&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;check-combination.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;check-combination.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;Choose a letter and a number, then click Check. The target combination is A + 2.&lt;/p&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Letter&lt;/legend&gt;
+        &lt;button class=&quot;letter&quot; type=&quot;button&quot;&gt;A&lt;/button&gt;
+        &lt;button class=&quot;letter&quot; type=&quot;button&quot;&gt;B&lt;/button&gt;
+    &lt;/fieldset&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Number&lt;/legend&gt;
+        &lt;button class=&quot;number&quot; type=&quot;button&quot;&gt;1&lt;/button&gt;
+        &lt;button class=&quot;number&quot; type=&quot;button&quot;&gt;2&lt;/button&gt;
+    &lt;/fieldset&gt;
+    &lt;button id=&quot;check-button&quot; type=&quot;button&quot;&gt;Check&lt;/button&gt;
+    &lt;p id=&quot;result&quot; aria-live=&quot;polite&quot;&gt;Not checked yet.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>check-combination.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full check-combination.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+p { line-height: 1.5; }
+fieldset { margin: 20px 0; padding: 0; border: 0; }
+legend { margin-bottom: 10px; }
+button { padding: 10px 16px; font: inherit; cursor: pointer; border: 1px solid #888; background: white; }
+.letter, .number { width: 52px; margin-right: 8px; }
+
+/* Each group keeps one highlighted choice. */
+.selected { background: #deded8; outline: 2px solid #555; }
+
+#check-button { margin: 4px 0; }
+#result { min-height: 48px; }</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>check-combination.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full check-combination.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">// Each group remembers its own choice between clicks.
+let selectedLetter = &quot;&quot;;
+let selectedNumber = &quot;&quot;;
+
+// .click(...) runs this function when a .letter button is clicked.
+$(&quot;.letter&quot;).click(function () {
+    // $(this) is the clicked button; .text() reads its text.
+    selectedLetter = $(this).text();
+    // Move the highlight within this group only.
+    $(&quot;.letter&quot;).removeClass(&quot;selected&quot;);
+    $(this).addClass(&quot;selected&quot;);
+    // The previous result no longer describes the new selection.
+    $(&quot;#result&quot;).text(&quot;Not checked yet.&quot;);
+});
+
+$(&quot;.number&quot;).click(function () {
+    // This also reads text, so the saved number is &quot;1&quot; or &quot;2&quot;.
+    selectedNumber = $(this).text();
+    $(&quot;.number&quot;).removeClass(&quot;selected&quot;);
+    $(this).addClass(&quot;selected&quot;);
+    $(&quot;#result&quot;).text(&quot;Not checked yet.&quot;);
+});
+
+// Selecting changes the choices; clicking Check evaluates them together.
+$(&quot;#check-button&quot;).click(function () {
+    // || means OR: either missing choice needs attention.
+    if (selectedLetter == &quot;&quot; || selectedNumber == &quot;&quot;) {
+        $(&quot;#result&quot;).text(&quot;Choose one letter and one number.&quot;);
+    }
+    // &amp;&amp; means AND: both comparisons must be true for a match.
+    else if (selectedLetter == &quot;A&quot; &amp;&amp; selectedNumber == &quot;2&quot;) {
+        $(&quot;#result&quot;).text(&quot;A + 2 matches.&quot;);
+    }
+    else {
+        $(&quot;#result&quot;).text(selectedLetter + &quot; + &quot; + selectedNumber + &quot; does not match.&quot;);
+    }
+});</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

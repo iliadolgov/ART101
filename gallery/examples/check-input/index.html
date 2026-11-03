@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8. Check typed input · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>8. Check typed input</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p>Check reads the field as text and converts it to a number. Empty or invalid entries get a prompt. Valid numbers are compared with <code>minimum</code>. Editing the field clears the previous result.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame logic-frame" id="live-example" src="check-input.html" title="Live example: Check typed input"></iframe>
+                <a class="demo-link" href="check-input.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">let minimum = 10;
+
+// .click(...) runs this function when #check-button is clicked.
+$(&quot;#check-button&quot;).click(function () {
+    // .val() reads the field as text; .trim() removes spaces at either end.
+    let input = $(&quot;#number-input&quot;).val().trim();
+    // Number(...) converts text to a number before we compare it.
+    let number = Number(input);
+
+    // Check empty input first: Number(&quot;&quot;) would otherwise become 0.
+    if (input == &quot;&quot;) {
+        $(&quot;#result&quot;).text(&quot;Enter a number first.&quot;);
+    }
+    // isFinite(...) rejects failed conversions and infinity.
+    else if (isFinite(number) == false) {
+        $(&quot;#result&quot;).text(&quot;Enter a valid number.&quot;);
+    }
+    else if (number &gt; minimum) {
+        $(&quot;#result&quot;).text(number + &quot; is greater than &quot; + minimum + &quot;.&quot;);
+    }
+    else {
+        $(&quot;#result&quot;).text(number + &quot; is not greater than &quot; + minimum + &quot;.&quot;);
+    }
+});</code></pre></div>
+                
+            </section>
+        </div>
+        <p class="change-suggestion">Try changing <code>minimum</code> from <code>10</code> to <code>20</code>. Check values below, equal to and above it.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/check-input.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>check-input.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>check-input.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full check-input.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Check typed input&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;check-input.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;check-input.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p id=&quot;instruction&quot;&gt;&lt;/p&gt;
+    &lt;label for=&quot;number-input&quot;&gt;Number&lt;/label&gt;
+    &lt;div class=&quot;controls&quot;&gt;
+        &lt;input id=&quot;number-input&quot; type=&quot;text&quot; inputmode=&quot;decimal&quot; autocomplete=&quot;off&quot;&gt;
+        &lt;button id=&quot;check-button&quot; type=&quot;button&quot;&gt;Check&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;p id=&quot;result&quot; aria-live=&quot;polite&quot;&gt;Not checked yet.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>check-input.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full check-input.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+p { line-height: 1.5; }
+button {
+    padding: 10px 16px;
+    border: 1px solid #888;
+    background: #f7f7f5;
+    font: inherit;
+    cursor: pointer;
+}
+.controls { display: flex; flex-wrap: wrap; gap: 10px; }
+#result {
+    margin-top: 24px;
+    min-height: 48px;
+    padding: 16px;
+    border: 1px solid #ccc;
+    background: #f7f7f5;
+}
+
+label { display: block; margin-bottom: 8px; }
+input {
+    box-sizing: border-box;
+    width: 160px;
+    max-width: 100%;
+    padding: 10px;
+    border: 1px solid #888;
+    font: inherit;
+}</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>check-input.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full check-input.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">let minimum = 10;
+$(&quot;#instruction&quot;).text(&quot;Enter a number greater than &quot; + minimum + &quot;.&quot;);
+
+// .click(...) runs this function when #check-button is clicked.
+$(&quot;#check-button&quot;).click(function () {
+    // .val() reads the field as text; .trim() removes spaces at either end.
+    let input = $(&quot;#number-input&quot;).val().trim();
+    // Number(...) converts text to a number before we compare it.
+    let number = Number(input);
+
+    // Check empty input first: Number(&quot;&quot;) would otherwise become 0.
+    if (input == &quot;&quot;) {
+        $(&quot;#result&quot;).text(&quot;Enter a number first.&quot;);
+    }
+    // isFinite(...) rejects failed conversions and infinity.
+    else if (isFinite(number) == false) {
+        $(&quot;#result&quot;).text(&quot;Enter a valid number.&quot;);
+    }
+    else if (number &gt; minimum) {
+        $(&quot;#result&quot;).text(number + &quot; is greater than &quot; + minimum + &quot;.&quot;);
+    }
+    else {
+        $(&quot;#result&quot;).text(number + &quot; is not greater than &quot; + minimum + &quot;.&quot;);
+    }
+});
+
+// The input event runs while editing; the previous check is now out of date.
+$(&quot;#number-input&quot;).on(&quot;input&quot;, function () {
+    $(&quot;#result&quot;).text(&quot;Not checked yet.&quot;);
+});</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

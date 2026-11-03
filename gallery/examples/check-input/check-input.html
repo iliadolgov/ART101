@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check typed input</title>
+    <link rel="stylesheet" href="check-input.css">
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="check-input.js" defer></script>
+</head>
+<body>
+    <p id="instruction"></p>
+    <label for="number-input">Number</label>
+    <div class="controls">
+        <input id="number-input" type="text" inputmode="decimal" autocomplete="off">
+        <button id="check-button" type="button">Check</button>
+    </div>
+    <p id="result" aria-live="polite">Not checked yet.</p>
+</body>
+</html>

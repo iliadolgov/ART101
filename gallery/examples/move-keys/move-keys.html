@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move with keys</title>
+    <link rel="stylesheet" href="move-keys.css">
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="move-keys.js" defer></script>
+</head>
+<body>
+    <p>Click inside the area, then use the arrow keys.</p>
+    <!-- tabindex makes this area focusable so it can receive key events. -->
+    <div id="stage" tabindex="0" aria-label="Movement area. Use the arrow keys.">
+        <div id="item"></div>
+    </div>
+</body>
+</html>

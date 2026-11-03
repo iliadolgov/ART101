@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select, then apply</title>
+    <link rel="stylesheet" href="select-apply.css">
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="select-apply.js" defer></script>
+</head>
+<body>
+    <p>Choose a stamp, then click either target. You can use the same stamp again.</p>
+    <div id="stamps">
+        <!-- These IDs also name the CSS classes used for the marks. -->
+        <button id="circle" class="stamp" type="button">Circle</button>
+        <button id="square" class="stamp" type="button">Square</button>
+    </div>
+    <div id="targets">
+        <button class="target" type="button">
+            <span class="mark" aria-hidden="true"></span>
+            <span>Target 1</span>
+        </button>
+        <button class="target" type="button">
+            <span class="mark" aria-hidden="true"></span>
+            <span>Target 2</span>
+        </button>
+    </div>
+    <p id="result" aria-live="polite">No stamp selected.</p>
+</body>
+</html>

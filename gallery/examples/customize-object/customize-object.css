@@ -1,0 +1,33 @@
+body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+p { line-height: 1.5; }
+label { display: block; margin-bottom: 6px; }
+input, select, button { box-sizing: border-box; font: inherit; }
+#object-label { width: 100%; padding: 8px; }
+#options { display: flex; gap: 24px; margin: 16px 0; }
+#object-color { width: 64px; height: 38px; padding: 2px; }
+#object-shape { height: 38px; padding: 6px; }
+button { padding: 8px 16px; cursor: pointer; border: 1px solid #888; background: white; }
+
+#object {
+    width: 140px;
+    height: 140px;
+    margin: 24px auto 0;
+    background-color: #d9d9d3;
+    border: 1px solid #777;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* JavaScript replaces the shape class when Apply is clicked. */
+.square { border-radius: 0; }
+.circle { border-radius: 50%; }
+
+/* A light label background keeps text readable on any chosen color. */
+#preview-label { max-width: 110px; padding: 4px; background: white; text-align: center; overflow-wrap: anywhere; }

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+    <main>
+        <header class="gallery-header">
+            <img class="gallery-logo" src="assets/logo.png" alt="" width="72" height="72">
+            <h1>ART101 Interaction gallery</h1>
+        </header>
+        <section class="example-group" aria-labelledby="events-heading">
+            <h2 id="events-heading">Events and page changes</h2>
+            <div class="cards">
+                <a class="card" href="examples/show-hide/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-square hidden-square"></span><span class="preview-arrow">→</span><span class="preview-square"></span></div>
+                    <h3>1. Show and hide</h3>
+                    <p>Use two buttons to show or hide an element.</p>
+                </a>
+                <a class="card" href="examples/change-class/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-square"></span><span class="preview-arrow">→</span><span class="preview-square dark-square"></span></div>
+                    <h3>2. Change a class</h3>
+                    <p>Add or remove a CSS class to change an element’s appearance.</p>
+                </a>
+                <a class="card" href="examples/reveal-hover/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item">Item</span><span class="preview-arrow">→</span><span class="preview-note">Detail</span></div>
+                    <h3>3. Reveal on hover</h3>
+                    <p>Show a note when the pointer enters an item; hide it on leaving.</p>
+                </a>
+            </div>
+        </section>
+        <section class="example-group" aria-labelledby="data-heading">
+            <h2 id="data-heading">Simple data</h2>
+            <div class="cards">
+                <a class="card" href="examples/inspect-item/index.html">
+                    <div class="card-preview" aria-hidden="true"><img class="preview-thumb" src="examples/inspect-item/striped-circle.svg" alt="" width="64" height="64"><span class="preview-arrow">→</span><span class="preview-details">Striped circle<span class="preview-detail-line"></span><span class="preview-detail-line"></span></span></div>
+                    <h3>4. Inspect an item</h3>
+                    <p>Click an item to show its name, description and image.</p>
+                </a>
+                <a class="card" href="examples/count-actions/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item">4</span><span class="preview-arrow">→</span><span class="preview-item preview-choice">5</span></div>
+                    <h3>5. Count actions and change the response</h3>
+                    <p>Count clicks and change the response when the count reaches a threshold.</p>
+                </a>
+                <a class="card" href="examples/message-sequence/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item">1</span><span class="preview-arrow">→</span><span class="preview-item">2</span><span class="preview-arrow">→</span><span class="preview-item">3</span></div>
+                    <h3>6. Move through a sequence</h3>
+                    <p>Step through messages in order, stop at the end, and restart.</p>
+                </a>
+                <a class="card" href="examples/random-choice/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item">?</span><span class="preview-arrow">→</span><span class="preview-item preview-circle"></span></div>
+                    <h3>7. Choose randomly</h3>
+                    <p>Pick an item from a list at random. Repeated results are possible.</p>
+                </a>
+            </div>
+        </section>
+        <section class="example-group" aria-labelledby="logic-heading">
+            <h2 id="logic-heading">Memory and logic</h2>
+            <div class="cards">
+                <a class="card" href="examples/check-input/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item preview-input">12</span><span class="preview-arrow">→</span><span class="preview-item">✓</span></div>
+                    <h3>8. Check typed input</h3>
+                    <p>Read a typed number and check whether it meets a rule.</p>
+                </a>
+                <a class="card" href="examples/select-apply/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item preview-circle preview-choice"></span><span class="preview-arrow">→</span><span class="preview-target"><span class="preview-item preview-circle"></span></span></div>
+                    <h3>9. Select, then apply</h3>
+                    <p>Choose a stamp, then apply it to either target. Keep using the same choice.</p>
+                </a>
+                <a class="card" href="examples/remember-prerequisite/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item">✓</span><span class="preview-arrow">→</span><span class="preview-item">Use</span></div>
+                    <h3>10. Remember a prerequisite</h3>
+                    <p>Make an action available only after an earlier action has happened.</p>
+                </a>
+                <a class="card" href="examples/check-combination/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-pair"><span class="preview-item">A</span><span>+</span><span class="preview-item">2</span></span><span class="preview-arrow">→</span><span class="preview-item">✓</span></div>
+                    <h3>11. Check a combination</h3>
+                    <p>Choose a letter and a number, then check whether they match a rule.</p>
+                </a>
+                <a class="card" href="examples/choose-branch/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item">A</span><span class="preview-arrow">→</span><span class="preview-stack"><span class="preview-item">A1</span><span class="preview-item">A2</span></span></div>
+                    <h3>12. Choose a branch</h3>
+                    <p>Let the first choice determine which choices appear next.</p>
+                </a>
+                <a class="card" href="examples/take-turns/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item preview-choice">A</span><span class="preview-arrow">↔</span><span class="preview-item">B</span></div>
+                    <h3>13. Take turns</h3>
+                    <p>Alternate between two participants and check whose turn it is.</p>
+                </a>
+            </div>
+        </section>
+        <section class="example-group" aria-labelledby="content-heading">
+            <h2 id="content-heading">Creating and managing content</h2>
+            <div class="cards">
+                <a class="card" href="examples/customize-object/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-square preview-labeled">Example</span><span class="preview-arrow">→</span><span class="preview-result preview-labeled"><span>Hello</span></span></div>
+                    <h3>14. Customize an object</h3>
+                    <p>Choose a label, color and shape, then apply them to one object.</p>
+                </a>
+                <a class="card" href="examples/create-item/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item preview-input">Hello</span><span class="preview-arrow">→</span><span class="preview-stack"><span class="preview-item preview-input">Hello</span><span class="preview-item preview-input">…</span></span></div>
+                    <h3>15. Create an item from input</h3>
+                    <p>Turn a typed label into a new item on the page.</p>
+                </a>
+                <a class="card" href="examples/generate-items/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item">3</span><span class="preview-arrow">→</span><span class="preview-pair"><span class="preview-small-tile">1</span><span class="preview-small-tile">2</span><span class="preview-small-tile">3</span></span></div>
+                    <h3>16. Generate a chosen quantity</h3>
+                    <p>Choose how many items to create, then generate a new set.</p>
+                </a>
+                <a class="card" href="examples/array-collection/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-array">[A, B]</span><span class="preview-arrow">→</span><span class="preview-stack"><span class="preview-item preview-input">A　×</span><span class="preview-item preview-input">B　×</span></span></div>
+                    <h3>17. Keep a collection in an array</h3>
+                    <p>Add and remove array entries, then redraw the collection.</p>
+                </a>
+                <a class="card" href="examples/filter-collection/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-pair"><span class="preview-item preview-circle"></span><span class="preview-item"></span></span><span class="preview-arrow">→</span><span class="preview-item preview-circle"></span></div>
+                    <h3>18. Filter a collection</h3>
+                    <p>Show matching items while keeping the full collection in data.</p>
+                </a>
+            </div>
+        </section>
+        <section class="example-group" aria-labelledby="pointer-heading">
+            <h2 id="pointer-heading">Pointer, keyboard, and dragging</h2>
+            <div class="cards">
+                <a class="card" href="examples/checked-drop/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item">A</span><span class="preview-arrow">→</span><span class="preview-target">A?</span></div>
+                    <h3>19. Drag, drop, check</h3>
+                    <p>Drop an item onto a target and check whether it matches.</p>
+                </a>
+                <a class="card" href="examples/follow-pointer/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item">↖</span><span class="preview-arrow">→</span><span class="preview-item preview-circle"></span></div>
+                    <h3>20. Follow the pointer</h3>
+                    <p>Switch following on or off, then move one element with the pointer.</p>
+                </a>
+                <a class="card" href="examples/move-keys/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-arrows">↑<br>← ↓ →</span><span class="preview-arrow">→</span><span class="preview-item"></span></div>
+                    <h3>21. Move with keys</h3>
+                    <p>Move an element with arrow keys and keep it within an area.</p>
+                </a>
+                <a class="card" href="examples/place-click/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-pair"><span class="preview-small-tile preview-circle"></span><span class="preview-small-tile preview-circle"></span><span class="preview-small-tile preview-circle"></span></span></div>
+                    <h3>22. Place something where you click</h3>
+                    <p>Create a new mark at each click’s position.</p>
+                </a>
+            </div>
+        </section>
+        <section class="example-group" aria-labelledby="time-heading">
+            <h2 id="time-heading">Time and sound</h2>
+            <div class="cards">
+                <a class="card" href="examples/temporary-response/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-note">Message</span><span class="preview-arrow">→</span><span class="preview-note preview-faded">Message</span></div>
+                    <h3>23. Show a temporary response</h3>
+                    <p>Show feedback briefly, restarting the delay after another click.</p>
+                </a>
+                <a class="card" href="examples/countdown/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item">5</span><span class="preview-arrow">→</span><span class="preview-item">0</span></div>
+                    <h3>24. Start and stop a countdown</h3>
+                    <p>Start, stop and reset one timer that stops at zero.</p>
+                </a>
+                <a class="card" href="examples/control-sound/index.html">
+                    <div class="card-preview" aria-hidden="true"><span class="preview-item">▶</span><span class="preview-arrow">·</span><span class="preview-item">Ⅱ</span><span class="preview-arrow">·</span><span class="preview-item">■</span></div>
+                    <h3>25. Control a sound</h3>
+                    <p>Play, pause and stop a local audio file.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

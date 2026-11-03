@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. Reveal on hover · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>3. Reveal on hover</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p>Moving onto the item shows its note; moving away hides it. <code>.hover()</code> receives those two functions in that order. Use a mouse or trackpad.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame" id="live-example" src="reveal-hover.html" title="Live example: Reveal on hover"></iframe>
+                <a class="demo-link" href="reveal-hover.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">// .hover(...) takes two functions: entering first, leaving second.
+$(&quot;#item&quot;).hover(
+    function () {
+        // Show the note when the pointer enters the item.
+        $(&quot;#note&quot;).show();
+    },
+    function () {
+        // Hide it again when the pointer leaves.
+        $(&quot;#note&quot;).hide();
+    }
+);</code></pre></div>
+                
+            </section>
+        </div>
+        <p class="change-suggestion">Try replacing the note’s text with an image. The same show and hide calls can reveal a preview.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/reveal-hover.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>reveal-hover.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>reveal-hover.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full reveal-hover.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Reveal on hover&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;reveal-hover.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;reveal-hover.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;Move the pointer onto the item, then away.&lt;/p&gt;
+    &lt;div id=&quot;item&quot;&gt;Item&lt;/div&gt;
+    &lt;p id=&quot;note&quot;&gt;Extra information about this item.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>reveal-hover.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full reveal-hover.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">* { box-sizing: border-box; }
+body { margin: 24px; font-family: Arial, sans-serif; color: #333; background: white; }
+p { line-height: 1.5; }
+button { padding: 10px 16px; border: 1px solid #888; background: #f7f7f5; font: inherit; cursor: pointer; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; }
+
+#item { width: 96px; height: 96px; display: flex; align-items: center; justify-content: center; background: #deded8; border: 1px solid #888; }
+#note { display: none; }</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>reveal-hover.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full reveal-hover.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">// .hover(...) takes two functions: entering first, leaving second.
+$(&quot;#item&quot;).hover(
+    function () {
+        // Show the note when the pointer enters the item.
+        $(&quot;#note&quot;).show();
+    },
+    function () {
+        // Hide it again when the pointer leaves.
+        $(&quot;#note&quot;).hide();
+    }
+);</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

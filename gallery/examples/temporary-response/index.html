@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23. Show a temporary response · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>23. Show a temporary response</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p>A click shows the message and schedules its removal after two seconds. Another click cancels the earlier timeout and starts a new one, so the message gets the full duration after the latest click.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame" id="live-example" src="temporary-response.html" title="Live example: Show a temporary response"></iframe>
+                <a class="demo-link" href="temporary-response.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">// Save the timer ID so a later click can cancel the pending hide.
+let hideTimer = null;
+
+// .click(...) runs this function when Show message is clicked.
+$(&quot;#show-button&quot;).click(function () {
+    clearTimeout(hideTimer);
+    $(&quot;#message&quot;).text(&quot;Message shown.&quot;);
+
+    // Run this function once after 2000 milliseconds (2 seconds).
+    hideTimer = setTimeout(function () {
+        $(&quot;#message&quot;).text(&quot;&quot;);
+    }, 2000);
+});</code></pre></div>
+                
+            </section>
+        </div>
+        <p class="change-suggestion">Try changing <code>2000</code> to <code>5000</code>. Click twice a few seconds apart and check when the message disappears.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/temporary-response.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>temporary-response.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>temporary-response.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full temporary-response.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Show a temporary response&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;temporary-response.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;temporary-response.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;button id=&quot;show-button&quot; type=&quot;button&quot;&gt;Show message&lt;/button&gt;
+    &lt;p id=&quot;message&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>temporary-response.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full temporary-response.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">* { box-sizing: border-box; }
+body { margin: 24px; font-family: Arial, sans-serif; color: #333; background: white; }
+p { line-height: 1.5; }
+button { padding: 10px 16px; border: 1px solid #888; background: #f7f7f5; font: inherit; cursor: pointer; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; }
+
+#message { min-height: 48px; margin-top: 24px; }</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>temporary-response.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full temporary-response.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">// Save the timer ID so a later click can cancel the pending hide.
+let hideTimer = null;
+
+// .click(...) runs this function when Show message is clicked.
+$(&quot;#show-button&quot;).click(function () {
+    clearTimeout(hideTimer);
+    $(&quot;#message&quot;).text(&quot;Message shown.&quot;);
+
+    // Run this function once after 2000 milliseconds (2 seconds).
+    hideTimer = setTimeout(function () {
+        $(&quot;#message&quot;).text(&quot;&quot;);
+    }, 2000);
+});</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

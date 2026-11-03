@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6. Move through a sequence · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>6. Move through a sequence</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p>The messages are stored in an array. <code>messageIndex</code> remembers which one is showing. Next advances one position and stops at the last message. Restart sequence returns to the first.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame data-frame" id="live-example" src="message-sequence.html" title="Live example: Move through a sequence"></iframe>
+                <a class="demo-link" href="message-sequence.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">let messages = [
+    &quot;First message.&quot;,
+    &quot;Second message.&quot;,
+    &quot;Third message. End of sequence.&quot;
+];
+
+// Array positions start at 0; remember our position between clicks.
+let messageIndex = 0;
+$(&quot;#message&quot;).text(messages[messageIndex]);
+
+// .click(...) runs this function when #next-button is clicked.
+$(&quot;#next-button&quot;).click(function () {
+    // .length counts the messages; the last position is one less.
+    if (messageIndex &lt; messages.length - 1) {
+        messageIndex = messageIndex + 1;
+        // Read the message at the new position and display it.
+        $(&quot;#message&quot;).text(messages[messageIndex]);
+    }
+});</code></pre></div>
+                
+            </section>
+        </div>
+        <p class="change-suggestion">Try adding a fourth message to the array and moving “End of sequence” to it. The same condition will stop at the new last message.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/message-sequence.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>message-sequence.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>message-sequence.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full message-sequence.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Move through a sequence&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;message-sequence.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;message-sequence.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;Use Next to move through the messages.&lt;/p&gt;
+    &lt;div id=&quot;controls&quot;&gt;
+        &lt;button id=&quot;next-button&quot; type=&quot;button&quot;&gt;Next&lt;/button&gt;
+        &lt;button id=&quot;restart-button&quot; type=&quot;button&quot;&gt;Restart sequence&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;p id=&quot;message&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>message-sequence.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full message-sequence.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+p { line-height: 1.5; }
+#controls { display: flex; flex-wrap: wrap; gap: 10px; }
+button {
+    padding: 10px 16px;
+    border: 1px solid #888;
+    background: #f7f7f5;
+    font: inherit;
+    cursor: pointer;
+}
+#message {
+    margin-top: 24px;
+    padding: 20px;
+    min-height: 60px;
+    border: 1px solid #ccc;
+    background: #f7f7f5;
+    font-size: 20px;
+}</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>message-sequence.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full message-sequence.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">let messages = [
+    &quot;First message.&quot;,
+    &quot;Second message.&quot;,
+    &quot;Third message. End of sequence.&quot;
+];
+
+// Array positions start at 0; remember our position between clicks.
+let messageIndex = 0;
+$(&quot;#message&quot;).text(messages[messageIndex]);
+
+// .click(...) runs this function when #next-button is clicked.
+$(&quot;#next-button&quot;).click(function () {
+    // .length counts the messages; the last position is one less.
+    if (messageIndex &lt; messages.length - 1) {
+        messageIndex = messageIndex + 1;
+        // Read the message at the new position and display it.
+        $(&quot;#message&quot;).text(messages[messageIndex]);
+    }
+});
+
+$(&quot;#restart-button&quot;).click(function () {
+    // Reset both the saved position and the displayed message.
+    messageIndex = 0;
+    $(&quot;#message&quot;).text(messages[messageIndex]);
+});</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

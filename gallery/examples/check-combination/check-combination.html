@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check a combination</title>
+    <link rel="stylesheet" href="check-combination.css">
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="check-combination.js" defer></script>
+</head>
+<body>
+    <p>Choose a letter and a number, then click Check. The target combination is A + 2.</p>
+    <fieldset>
+        <legend>Letter</legend>
+        <button class="letter" type="button">A</button>
+        <button class="letter" type="button">B</button>
+    </fieldset>
+    <fieldset>
+        <legend>Number</legend>
+        <button class="number" type="button">1</button>
+        <button class="number" type="button">2</button>
+    </fieldset>
+    <button id="check-button" type="button">Check</button>
+    <p id="result" aria-live="polite">Not checked yet.</p>
+</body>
+</html>

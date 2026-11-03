@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>19. Drag, drop, check · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>19. Drag, drop, check</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p>When you start dragging an item, its ID is saved in <code>draggedId</code>. The target highlights when you drag over it. A is the expected item; other items do not match. When the drag ends, the saved ID is cleared. Use a mouse or trackpad.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame drag-frame" id="live-example" src="checked-drop.html" title="Live example: Drag, drop, check"></iframe>
+                <a class="demo-link" href="checked-drop.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">// Shared by the handlers; an empty string means no item is being dragged.
+let draggedId = &quot;&quot;;
+// Change this ID to choose which item matches.
+let expectedItemId = &quot;item-a&quot;;
+
+// Run this function when dragging starts on an .item element.
+$(&quot;.item&quot;).on(&quot;dragstart&quot;, function () {
+    // $(this) selects the dragged item; .attr(&quot;id&quot;) reads its HTML ID.
+    draggedId = $(this).attr(&quot;id&quot;);
+});
+
+// Run this function when an item is dropped on #target.
+// jQuery supplies event: information and controls for this drop.
+$(&quot;#target&quot;).on(&quot;drop&quot;, function (event) {
+    // Stop default actions such as opening a dropped image.
+    event.preventDefault();
+    // Remove the CSS class that supplies the drag highlight.
+    $(&quot;#target&quot;).removeClass(&quot;drag-over&quot;);
+
+    // Ignore drops that did not start on an .item element.
+    if (draggedId == &quot;&quot;) {
+        return;
+    }
+
+    // Compare the saved ID with the expected item.
+    if (draggedId == expectedItemId) {
+        // .text(...) replaces the text inside #result.
+        $(&quot;#result&quot;).text(&quot;This item matches.&quot;);
+    }
+    else {
+        $(&quot;#result&quot;).text(&quot;This item does not match. Try another.&quot;);
+    }
+});</code></pre></div>
+            </section>
+        </div>
+        <p class="change-suggestion">Try changing <code>expectedItemId</code> to <code>"item-b"</code> and updating the instruction in HTML to ask for B. The same matching code now accepts B and rejects A.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/checked-drop.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>checked-drop.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>checked-drop.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full checked-drop.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Drag, drop, check&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;checked-drop.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;checked-drop.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;Drag either item onto the target. It is looking for A.&lt;/p&gt;
+    &lt;div id=&quot;items&quot;&gt;
+        &lt;!-- draggable lets the browser start dragging this element. --&gt;
+        &lt;div id=&quot;item-a&quot; class=&quot;item&quot; draggable=&quot;true&quot;&gt;A&lt;/div&gt;
+        &lt;div id=&quot;item-b&quot; class=&quot;item&quot; draggable=&quot;true&quot;&gt;B&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;target&quot;&gt;Drop an item here&lt;/div&gt;
+    &lt;p id=&quot;result&quot; aria-live=&quot;polite&quot;&gt;No item checked yet.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>checked-drop.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full checked-drop.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+p { line-height: 1.5; }
+
+#items { display: flex; gap: 16px; margin: 24px 0; }
+
+.item {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #777;
+    background: #e7e7e3;
+    font-size: 22px;
+    cursor: grab;
+    user-select: none;
+}
+
+.item:active { cursor: grabbing; }
+
+#target {
+    padding: 30px 12px;
+    border: 2px dashed #999;
+    text-align: center;
+    background: #f7f7f5;
+}
+
+/* Highlight on pointer hover or when JavaScript adds the drag-over class. */
+#target:hover,
+#target.drag-over {
+    border-color: #333;
+    background: #deded8;
+}
+
+#result { min-height: 48px; }</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>checked-drop.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full checked-drop.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">// Shared by the handlers; an empty string means no item is being dragged.
+let draggedId = &quot;&quot;;
+// Change this ID to choose which item matches.
+let expectedItemId = &quot;item-a&quot;;
+
+// Run this function when dragging starts on an .item element.
+$(&quot;.item&quot;).on(&quot;dragstart&quot;, function () {
+    // $(this) selects the dragged item; .attr(&quot;id&quot;) reads its HTML ID.
+    draggedId = $(this).attr(&quot;id&quot;);
+});
+
+// While an item is over the target, jQuery passes in the event details.
+$(&quot;#target&quot;).on(&quot;dragover&quot;, function (event) {
+    // Cancel the browser&#x27;s default refusal to accept a drop.
+    event.preventDefault();
+    // Add the CSS class that highlights the target.
+    $(&quot;#target&quot;).addClass(&quot;drag-over&quot;);
+});
+
+// Clear the drag highlight when the item leaves the target.
+$(&quot;#target&quot;).on(&quot;dragleave&quot;, function () {
+    $(&quot;#target&quot;).removeClass(&quot;drag-over&quot;);
+});
+
+// Run this function when an item is dropped on #target.
+// jQuery supplies event: information and controls for this drop.
+$(&quot;#target&quot;).on(&quot;drop&quot;, function (event) {
+    // Stop default actions such as opening a dropped image.
+    event.preventDefault();
+    // Remove the CSS class that supplies the drag highlight.
+    $(&quot;#target&quot;).removeClass(&quot;drag-over&quot;);
+
+    // Ignore drops that did not start on an .item element.
+    if (draggedId == &quot;&quot;) {
+        return;
+    }
+
+    // Compare the saved ID with the expected item.
+    if (draggedId == expectedItemId) {
+        // .text(...) replaces the text inside #result.
+        $(&quot;#result&quot;).text(&quot;This item matches.&quot;);
+    }
+    else {
+        $(&quot;#result&quot;).text(&quot;This item does not match. Try another.&quot;);
+    }
+});
+
+// Clear the saved ID and highlight after a drop or canceled drag.
+$(&quot;.item&quot;).on(&quot;dragend&quot;, function () {
+    draggedId = &quot;&quot;;
+    $(&quot;#target&quot;).removeClass(&quot;drag-over&quot;);
+});</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

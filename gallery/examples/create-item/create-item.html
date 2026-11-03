@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an item from input</title>
+    <link rel="stylesheet" href="create-item.css">
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="create-item.js" defer></script>
+</head>
+<body>
+    <label for="item-label">Item label</label>
+    <div class="controls">
+        <input id="item-label" type="text" autocomplete="off">
+        <button id="add-button" type="button">Add</button>
+    </div>
+    <p id="message" aria-live="polite"></p>
+    <ul id="items" aria-live="polite"></ul>
+</body>
+</html>

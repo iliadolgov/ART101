@@ -1,0 +1,61 @@
+/* VS Code Light Modern palette, mapped to Prism's token categories.
+   Light Modern inherits syntax colors from Light+ and Light (Visual Studio).
+   Sources: microsoft/vscode/extensions/theme-defaults/themes/
+   light_modern.json, light_plus.json, light_vs.json.
+   Prism and VS Code tokenize code differently; this stylesheet maps colors. */
+
+pre[class*="language-"],
+code[class*="language-"] {
+    color: #3b3b3b;
+    background: #ffffff;
+    text-shadow: none;
+}
+
+pre[class*="language-"]::selection,
+pre[class*="language-"] ::selection,
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection {
+    background: #add6ff;
+    text-shadow: none;
+}
+
+.token.comment,
+.token.prolog,
+.token.cdata { color: #008000; }
+
+.token.doctype,
+.token.keyword,
+.token.boolean,
+.token.atrule { color: #0000ff; }
+
+.token.string,
+.token.char { color: #a31515; }
+
+.token.number { color: #098658; }
+.token.function { color: #795e26; }
+.token.class-name,
+.token.builtin { color: #267f99; }
+.token.variable,
+.token.parameter,
+.token.property { color: #001080; }
+.token.constant { color: #0070c1; }
+
+.token.tag,
+.token.selector { color: #800000; }
+.token.attr-name { color: #e50000; }
+.token.attr-value { color: #0000ff; }
+
+.token.punctuation,
+.token.operator,
+.token.entity { color: #3b3b3b; background: none; }
+.token.tag > .token.punctuation { color: #800000; }
+.token.attr-value > .token.punctuation { color: #0000ff; }
+.token.attr-value > .token.attr-equals { color: #3b3b3b; }
+
+.language-css .token.property { color: #e50000; }
+.language-css .token.string,
+.language-css .token.url { color: #0451a5; background: none; }
+.token.regex { color: #811f3f; }
+.token.important { color: #0000ff; }
+.token.inserted { color: #098658; }
+.token.deleted { color: #a31515; }

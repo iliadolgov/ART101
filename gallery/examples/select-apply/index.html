@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9. Select, then apply · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>9. Select, then apply</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p>Clicking a stamp saves its ID in <code>selectedStamp</code> and highlights the choice. Clicking a target uses that saved value to change the mark inside it. The choice stays selected, so it can be applied again. A target click before choosing a stamp asks you to choose one.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame select-frame" id="live-example" src="select-apply.html" title="Live example: Select, then apply"></iframe>
+                <a class="demo-link" href="select-apply.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">// Outside both handlers so the choice lasts between clicks.
+let selectedStamp = &quot;&quot;;
+
+// .click(...) runs this function when either .stamp button is clicked.
+$(&quot;.stamp&quot;).click(function () {
+    // $(this) is the clicked stamp; its ID is also a shape class name.
+    selectedStamp = $(this).attr(&quot;id&quot;);
+});
+
+$(&quot;.target&quot;).click(function () {
+    // An empty string means no stamp has been chosen yet.
+    if (selectedStamp == &quot;&quot;) {
+        $(&quot;#result&quot;).text(&quot;Choose a stamp first.&quot;);
+    }
+    else {
+        // .find(...) selects the mark inside this clicked target.
+        // Remove its old shape before applying the saved choice.
+        $(this).find(&quot;.mark&quot;).removeClass(&quot;circle square&quot;);
+        $(this).find(&quot;.mark&quot;).addClass(selectedStamp);
+        // Keep selectedStamp so it can be used again.
+    }
+});</code></pre></div>
+            </section>
+        </div>
+        <p class="change-suggestion">Try adding a third target in the HTML. The existing target handler will work for it too.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/select-apply.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>select-apply.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>select-apply.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full select-apply.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Select, then apply&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;select-apply.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;select-apply.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;Choose a stamp, then click either target. You can use the same stamp again.&lt;/p&gt;
+    &lt;div id=&quot;stamps&quot;&gt;
+        &lt;!-- These IDs also name the CSS classes used for the marks. --&gt;
+        &lt;button id=&quot;circle&quot; class=&quot;stamp&quot; type=&quot;button&quot;&gt;Circle&lt;/button&gt;
+        &lt;button id=&quot;square&quot; class=&quot;stamp&quot; type=&quot;button&quot;&gt;Square&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;targets&quot;&gt;
+        &lt;button class=&quot;target&quot; type=&quot;button&quot;&gt;
+            &lt;span class=&quot;mark&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+            &lt;span&gt;Target 1&lt;/span&gt;
+        &lt;/button&gt;
+        &lt;button class=&quot;target&quot; type=&quot;button&quot;&gt;
+            &lt;span class=&quot;mark&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+            &lt;span&gt;Target 2&lt;/span&gt;
+        &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;p id=&quot;result&quot; aria-live=&quot;polite&quot;&gt;No stamp selected.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>select-apply.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full select-apply.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+p { line-height: 1.5; }
+button { font: inherit; cursor: pointer; }
+
+#stamps { display: flex; gap: 12px; }
+.stamp { padding: 10px 16px; border: 1px solid #888; background: white; }
+
+/* Only the chosen stamp receives this class. */
+.stamp.selected { background: #deded8; outline: 2px solid #555; }
+
+#targets { display: flex; gap: 16px; margin: 24px 0; }
+.target {
+    width: 120px;
+    height: 130px;
+    border: 1px dashed #888;
+    background: #f7f7f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+.target:hover { background: #eeeeea; }
+.mark { width: 50px; height: 50px; border: 1px dotted #aaa; }
+
+/* Shape classes change the mark inside a target. */
+.mark.circle { border: 1px solid #666; border-radius: 50%; background: #8d8d86; }
+.mark.square { border: 1px solid #666; border-radius: 0; background: #8d8d86; }
+
+#result { min-height: 48px; }</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>select-apply.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full select-apply.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">// Outside both handlers so the choice lasts between clicks.
+let selectedStamp = &quot;&quot;;
+
+// .click(...) runs this function when either .stamp button is clicked.
+$(&quot;.stamp&quot;).click(function () {
+    // $(this) is the clicked stamp; its ID is also a shape class name.
+    selectedStamp = $(this).attr(&quot;id&quot;);
+    // Move the selection highlight from the old choice to the new one.
+    $(&quot;.stamp&quot;).removeClass(&quot;selected&quot;);
+    $(this).addClass(&quot;selected&quot;);
+    $(&quot;#result&quot;).text(&quot;Selected: &quot; + selectedStamp + &quot;. Click a target.&quot;);
+});
+
+$(&quot;.target&quot;).click(function () {
+    // An empty string means no stamp has been chosen yet.
+    if (selectedStamp == &quot;&quot;) {
+        $(&quot;#result&quot;).text(&quot;Choose a stamp first.&quot;);
+    }
+    else {
+        // .find(...) selects the mark inside this clicked target.
+        // Remove its old shape before applying the saved choice.
+        $(this).find(&quot;.mark&quot;).removeClass(&quot;circle square&quot;);
+        $(this).find(&quot;.mark&quot;).addClass(selectedStamp);
+        $(&quot;#result&quot;).text(&quot;Applied &quot; + selectedStamp + &quot;.&quot;);
+        // Keep selectedStamp so it can be used again.
+    }
+});</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

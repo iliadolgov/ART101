@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12. Choose a branch · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>12. Choose a branch</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p>The <code>branches</code> object stores each first choice and its next choices. Buttons are built from that data. Selecting a branch replaces the continuation buttons; the next click displays the path. Changing branches clears the previous result.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame logic-frame" id="live-example" src="choose-branch.html" title="Live example: Choose a branch"></iframe>
+                <a class="demo-link" href="choose-branch.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">// Each property names a branch; its array lists the next choices.
+let branches = {
+    A: [&quot;A1&quot;, &quot;A2&quot;],
+    B: [&quot;B1&quot;, &quot;B2&quot;]
+};
+
+// Remember the first choice between the two clicks.
+let selectedBranch = &quot;&quot;;
+
+// These buttons already exist, so .click(...) can attach to them directly.
+$(&quot;.branch-choice&quot;).click(function () {
+    // $(this) is the clicked button; its text is a key in branches.
+    selectedBranch = $(this).text();
+    // Brackets look up the array using the saved property name.
+    let nextChoices = branches[selectedBranch];
+    $(&quot;#next-heading&quot;).text(&quot;Continue from &quot; + selectedBranch + &quot;:&quot;);
+    // Remove the previous buttons and result before building the new choices.
+    $(&quot;#next-choices&quot;).empty();
+    $(&quot;#result&quot;).text(&quot;&quot;);
+
+    // Visit every array position, starting at 0.
+    for (let i = 0; i &lt; nextChoices.length; i = i + 1) {
+        let button = $(&quot;&lt;button class=&#x27;next-choice&#x27; type=&#x27;button&#x27;&gt;&lt;/button&gt;&quot;);
+        button.text(nextChoices[i]);
+        $(&quot;#next-choices&quot;).append(button);
+    }
+    $(&quot;#next-step&quot;).show();
+});
+
+// Listen on the container so clicks on newly created buttons also work.
+$(&quot;#next-choices&quot;).on(&quot;click&quot;, &quot;.next-choice&quot;, function () {
+    let nextChoice = $(this).text();
+    $(&quot;#result&quot;).text(&quot;Path: &quot; + selectedBranch + &quot; → &quot; + nextChoice + &quot;.&quot;);
+});</code></pre></div>
+                
+            </section>
+        </div>
+        <p class="change-suggestion">Try adding <code>C: ["C1", "C2", "C3"]</code> to <code>branches</code>. The same code will create the new branch and its three next choices.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/choose-branch.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>choose-branch.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>choose-branch.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full choose-branch.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Choose a branch&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;choose-branch.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;choose-branch.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;Choose a branch, then choose where to continue.&lt;/p&gt;
+    &lt;!-- JavaScript fills both button containers from the branches object. --&gt;
+    &lt;div id=&quot;branches&quot; class=&quot;controls&quot;&gt;&lt;/div&gt;
+    &lt;div id=&quot;next-step&quot;&gt;
+        &lt;p id=&quot;next-heading&quot;&gt;&lt;/p&gt;
+        &lt;div id=&quot;next-choices&quot; class=&quot;controls&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;p id=&quot;result&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>choose-branch.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full choose-branch.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+p { line-height: 1.5; }
+button {
+    padding: 10px 16px;
+    border: 1px solid #888;
+    background: #f7f7f5;
+    font: inherit;
+    cursor: pointer;
+}
+.controls { display: flex; flex-wrap: wrap; gap: 10px; }
+#result {
+    margin-top: 24px;
+    min-height: 48px;
+    padding: 16px;
+    border: 1px solid #ccc;
+    background: #f7f7f5;
+}
+
+/* Show the next step after a branch is chosen. */
+#next-step { display: none; margin-top: 24px; }</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>choose-branch.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full choose-branch.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">// Each property names a branch; its array lists the next choices.
+let branches = {
+    A: [&quot;A1&quot;, &quot;A2&quot;],
+    B: [&quot;B1&quot;, &quot;B2&quot;]
+};
+
+// Remember the first choice between the two clicks.
+let selectedBranch = &quot;&quot;;
+
+// for...in visits each property name in the object.
+for (let branchName in branches) {
+    let button = $(&quot;&lt;button class=&#x27;branch-choice&#x27; type=&#x27;button&#x27;&gt;&lt;/button&gt;&quot;);
+    // .text(...) sets the label; .append(...) puts the button on the page.
+    button.text(branchName);
+    $(&quot;#branches&quot;).append(button);
+}
+
+// These buttons already exist, so .click(...) can attach to them directly.
+$(&quot;.branch-choice&quot;).click(function () {
+    // $(this) is the clicked button; its text is a key in branches.
+    selectedBranch = $(this).text();
+    // Brackets look up the array using the saved property name.
+    let nextChoices = branches[selectedBranch];
+    $(&quot;#next-heading&quot;).text(&quot;Continue from &quot; + selectedBranch + &quot;:&quot;);
+    // Remove the previous buttons and result before building the new choices.
+    $(&quot;#next-choices&quot;).empty();
+    $(&quot;#result&quot;).text(&quot;&quot;);
+
+    // Visit every array position, starting at 0.
+    for (let i = 0; i &lt; nextChoices.length; i = i + 1) {
+        let button = $(&quot;&lt;button class=&#x27;next-choice&#x27; type=&#x27;button&#x27;&gt;&lt;/button&gt;&quot;);
+        button.text(nextChoices[i]);
+        $(&quot;#next-choices&quot;).append(button);
+    }
+    $(&quot;#next-step&quot;).show();
+});
+
+// Listen on the container so clicks on newly created buttons also work.
+$(&quot;#next-choices&quot;).on(&quot;click&quot;, &quot;.next-choice&quot;, function () {
+    let nextChoice = $(this).text();
+    $(&quot;#result&quot;).text(&quot;Path: &quot; + selectedBranch + &quot; → &quot; + nextChoice + &quot;.&quot;);
+});</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

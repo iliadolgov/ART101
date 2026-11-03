@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21. Move with keys · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>21. Move with keys</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p>Arrow keys change the saved <code>x</code> or <code>y</code> by one step. The code checks the edges before moving the item. The area must have keyboard focus; handled arrow keys move the item instead of scrolling the page.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame pointer-frame" id="live-example" src="move-keys.html" title="Live example: Move with keys"></iframe>
+                <a class="demo-link" href="move-keys.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">let x = 0;
+let y = 0;
+let step = 20;
+
+// This area receives keys while focused; event.key names the pressed key.
+$(&quot;#stage&quot;).keydown(function (event) {
+    if (event.key == &quot;ArrowRight&quot;) {
+        x = x + step;
+    }
+    else if (event.key == &quot;ArrowLeft&quot;) {
+        x = x - step;
+    }
+    else if (event.key == &quot;ArrowDown&quot;) {
+        y = y + step;
+    }
+    else if (event.key == &quot;ArrowUp&quot;) {
+        y = y - step;
+    }
+    else {
+        return; // Leave other keys to the browser.
+    }
+    // Arrow keys move this item instead of scrolling the page.
+    event.preventDefault();
+
+    // Leave room for the whole item at the right and bottom edges.
+    let maxX = $(&quot;#stage&quot;).width() - $(&quot;#item&quot;).outerWidth();
+    let maxY = $(&quot;#stage&quot;).height() - $(&quot;#item&quot;).outerHeight();
+    if (x &lt; 0) { x = 0; }
+    if (x &gt; maxX) { x = maxX; }
+    if (y &lt; 0) { y = 0; }
+    if (y &gt; maxY) { y = maxY; }
+
+    $(&quot;#item&quot;).css(&quot;left&quot;, x);
+    $(&quot;#item&quot;).css(&quot;top&quot;, y);
+});</code></pre></div>
+                
+            </section>
+        </div>
+        <p class="change-suggestion">Try changing <code>step</code> to <code>5</code>. The same boundary checks keep the whole item inside the area.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/move-keys.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>move-keys.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>move-keys.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full move-keys.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Move with keys&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;move-keys.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;move-keys.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;Click inside the area, then use the arrow keys.&lt;/p&gt;
+    &lt;!-- tabindex makes this area focusable so it can receive key events. --&gt;
+    &lt;div id=&quot;stage&quot; tabindex=&quot;0&quot; aria-label=&quot;Movement area. Use the arrow keys.&quot;&gt;
+        &lt;div id=&quot;item&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>move-keys.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full move-keys.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">* { box-sizing: border-box; }
+body { margin: 24px; font-family: Arial, sans-serif; color: #333; background: white; }
+p { line-height: 1.5; }
+button { padding: 10px 16px; border: 1px solid #888; background: #f7f7f5; font: inherit; cursor: pointer; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* This relative container is the origin for its absolutely positioned child: left/top are local to it. */
+#stage { position: relative; width: 100%; height: 220px; margin-top: 24px; background: #f7f7f5; outline: 1px solid #aaa; overflow: hidden; }
+
+#stage { width: 220px; max-width: 100%; height: 200px; }
+#stage:focus { outline: 2px solid #555; outline-offset: 3px; }
+#item { position: absolute; left: 0; top: 0; width: 24px; height: 24px; background: #888; border: 1px solid #555; }</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>move-keys.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full move-keys.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">let x = 0;
+let y = 0;
+let step = 20;
+
+// This area receives keys while focused; event.key names the pressed key.
+$(&quot;#stage&quot;).keydown(function (event) {
+    if (event.key == &quot;ArrowRight&quot;) {
+        x = x + step;
+    }
+    else if (event.key == &quot;ArrowLeft&quot;) {
+        x = x - step;
+    }
+    else if (event.key == &quot;ArrowDown&quot;) {
+        y = y + step;
+    }
+    else if (event.key == &quot;ArrowUp&quot;) {
+        y = y - step;
+    }
+    else {
+        return; // Leave other keys to the browser.
+    }
+    // Arrow keys move this item instead of scrolling the page.
+    event.preventDefault();
+
+    // Leave room for the whole item at the right and bottom edges.
+    let maxX = $(&quot;#stage&quot;).width() - $(&quot;#item&quot;).outerWidth();
+    let maxY = $(&quot;#stage&quot;).height() - $(&quot;#item&quot;).outerHeight();
+    if (x &lt; 0) { x = 0; }
+    if (x &gt; maxX) { x = maxX; }
+    if (y &lt; 0) { y = 0; }
+    if (y &gt; maxY) { y = maxY; }
+
+    $(&quot;#item&quot;).css(&quot;left&quot;, x);
+    $(&quot;#item&quot;).css(&quot;top&quot;, y);
+});</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

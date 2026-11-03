@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2. Change a class · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>2. Change a class</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p><code>.toggleClass("changed")</code> adds the class on one click and removes it on the next. The CSS rule <code>#element.changed</code> describes how the element looks when it has that class.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame" id="live-example" src="change-class.html" title="Live example: Change a class"></iframe>
+                <a class="demo-link" href="change-class.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">// $(&quot;#change-button&quot;) selects the button by its HTML ID.
+// .click(...) runs this function each time that button is clicked.
+$(&quot;#change-button&quot;).click(function () {
+    // .toggleClass(...) switches the &quot;changed&quot; CSS class on or off.
+    // The CSS rule #element.changed supplies its appearance.
+    $(&quot;#element&quot;).toggleClass(&quot;changed&quot;);
+});</code></pre></div>
+                <div class="css-snippet"><div class="panel-heading"><h2 class="filename">change-class.css</h2><button class="quiet-button" data-copy="css-snippet" type="button" aria-label="Copy change-class.css">Copy</button></div><div class="code-box"><pre><code id="css-snippet" class="language-css">/* Apply these styles only while #element has the changed class. */
+#element.changed {
+    border-color: #333;
+    border-radius: 50%;
+    background: #777;
+    color: white;
+}</code></pre></div></div>
+            </section>
+        </div>
+        <p class="change-suggestion">Try changing <code>border-radius: 50%</code> to <code>border-radius: 12px</code> in the CSS.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/change-class.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>change-class.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>change-class.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full change-class.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Change a class&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;change-class.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;change-class.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;Switch the appearance on, then off.&lt;/p&gt;
+    &lt;button id=&quot;change-button&quot;&gt;Change appearance&lt;/button&gt;
+    &lt;div id=&quot;stage&quot;&gt;
+        &lt;div id=&quot;element&quot;&gt;A&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>change-class.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full change-class.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+p { line-height: 1.5; }
+
+button {
+    padding: 10px 18px;
+    border: 1px solid #777;
+    border-radius: 3px;
+    background: #f2f2f0;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#stage { margin-top: 28px; }
+
+#element {
+    width: 110px;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #999;
+    background: #e7e7e3;
+    font-size: 24px;
+}
+
+/* Apply these styles only while #element has the changed class. */
+#element.changed {
+    border-color: #333;
+    border-radius: 50%;
+    background: #777;
+    color: white;
+}</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>change-class.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full change-class.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">// $(&quot;#change-button&quot;) selects the button by its HTML ID.
+// .click(...) runs this function each time that button is clicked.
+$(&quot;#change-button&quot;).click(function () {
+    // .toggleClass(...) switches the &quot;changed&quot; CSS class on or off.
+    // The CSS rule #element.changed supplies its appearance.
+    $(&quot;#element&quot;).toggleClass(&quot;changed&quot;);
+});</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

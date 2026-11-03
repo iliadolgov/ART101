@@ -1,0 +1,41 @@
+body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+p { line-height: 1.5; }
+
+#items { display: flex; gap: 16px; margin: 24px 0; }
+
+.item {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #777;
+    background: #e7e7e3;
+    font-size: 22px;
+    cursor: grab;
+    user-select: none;
+}
+
+.item:active { cursor: grabbing; }
+
+#target {
+    padding: 30px 12px;
+    border: 2px dashed #999;
+    text-align: center;
+    background: #f7f7f5;
+}
+
+/* Highlight on pointer hover or when JavaScript adds the drag-over class. */
+#target:hover,
+#target.drag-over {
+    border-color: #333;
+    background: #deded8;
+}
+
+#result { min-height: 48px; }

@@ -1,0 +1,18 @@
+body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+p { line-height: 1.5; }
+button {
+    padding: 10px 16px;
+    border: 1px solid #888;
+    background: #f7f7f5;
+    font: inherit;
+    cursor: pointer;
+}
+.count-line { margin: 24px 0 16px; font-size: 24px; }
+#count { font-weight: bold; }
+#result { padding: 16px; border: 1px solid #ccc; background: #f7f7f5; }

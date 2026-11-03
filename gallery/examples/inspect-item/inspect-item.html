@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspect an item</title>
+    <link rel="stylesheet" href="inspect-item.css">
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="inspect-item.js" defer></script>
+</head>
+<body>
+    <p>Click an image to inspect the item.</p>
+    <div id="items">
+        <button id="item-a" type="button">
+            <img src="striped-circle.svg" alt="" width="80" height="80">
+            <span>Striped circle</span>
+        </button>
+        <button id="item-b" type="button">
+            <img src="dotted-square.svg" alt="" width="80" height="80">
+            <span>Dotted square</span>
+        </button>
+    </div>
+    <!-- The display function fills this one details area. -->
+    <div id="details" aria-live="polite">
+        <img id="detail-image" alt="" width="110" height="110">
+        <div>
+            <h2 id="detail-name"></h2>
+            <p id="detail-description"></p>
+        </div>
+    </div>
+</body>
+</html>

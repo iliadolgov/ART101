@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7. Choose randomly · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>7. Choose randomly</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p>Pick chooses a random position in the array and displays the item there. Each click makes a new choice, so the same item can appear again.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame data-frame" id="live-example" src="random-choice.html" title="Live example: Choose randomly"></iframe>
+                <a class="demo-link" href="random-choice.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">let choices = [&quot;Circle&quot;, &quot;Square&quot;, &quot;Triangle&quot;, &quot;Line&quot;];
+
+// .click(...) runs this function when #pick-button is clicked.
+$(&quot;#pick-button&quot;).click(function () {
+    // Math.random() is at least 0 and below 1.
+    // Multiplying by .length spreads the values across the list.
+    let randomNumber = Math.random() * choices.length;
+    // Math.floor(...) rounds down to a valid array position.
+    let randomIndex = Math.floor(randomNumber);
+    // Square brackets read the choice at that position.
+    let chosenItem = choices[randomIndex];
+    $(&quot;#result&quot;).text(chosenItem);
+});</code></pre></div>
+                
+            </section>
+        </div>
+        <p class="change-suggestion">Try adding another item to <code>choices</code>. The random range uses the array’s length, so the new item is included.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/random-choice.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>random-choice.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>random-choice.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full random-choice.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Choose randomly&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;random-choice.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;random-choice.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;Pick an item from the list. The same item can appear again.&lt;/p&gt;
+    &lt;button id=&quot;pick-button&quot; type=&quot;button&quot;&gt;Pick&lt;/button&gt;
+    &lt;p id=&quot;result&quot; aria-live=&quot;polite&quot;&gt;Nothing picked yet.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>random-choice.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full random-choice.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+p { line-height: 1.5; }
+button {
+    padding: 10px 16px;
+    border: 1px solid #888;
+    background: #f7f7f5;
+    font: inherit;
+    cursor: pointer;
+}
+#result {
+    margin-top: 24px;
+    padding: 20px;
+    min-height: 60px;
+    border: 1px solid #ccc;
+    background: #f7f7f5;
+    font-size: 20px;
+}</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>random-choice.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full random-choice.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">let choices = [&quot;Circle&quot;, &quot;Square&quot;, &quot;Triangle&quot;, &quot;Line&quot;];
+
+// .click(...) runs this function when #pick-button is clicked.
+$(&quot;#pick-button&quot;).click(function () {
+    // Math.random() is at least 0 and below 1.
+    // Multiplying by .length spreads the values across the list.
+    let randomNumber = Math.random() * choices.length;
+    // Math.floor(...) rounds down to a valid array position.
+    let randomIndex = Math.floor(randomNumber);
+    // Square brackets read the choice at that position.
+    let chosenItem = choices[randomIndex];
+    $(&quot;#result&quot;).text(chosenItem);
+});</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

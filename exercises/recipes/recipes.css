@@ -1,0 +1,101 @@
+HTML {
+    background-color: peachpuff; background-image: url("../../stars.gif");
+    background-size: 100px;
+}
+
+
+A {
+    color: lawngreen
+}
+
+A:hover {
+    color: aqua;
+    background: rgb(19, 32, 113)
+}
+
+UL {
+    color: red;
+}
+
+h1 {
+    background-color: rgb(19, 32, 113);
+    color: rgb(82, 172, 172);
+    font-weight: normal;
+}
+
+P {
+    background-color: cornsilk;
+    padding: 20px;
+    margin: 50px;
+
+}
+
+IMG {
+    display: block;
+
+
+
+}
+
+IMG:hover {
+    width: 70%;
+    transition: linear 1000ms;
+}
+
+#beyonce {
+    width: 70%;
+}
+
+.highlight_01 {
+    background-color: palevioletred;
+}
+
+.highlight_01:hover {
+    background-color: rgb(220, 81, 197);
+}
+
+.highlight_01 strong {
+    background-color: rgb(251, 177, 202);
+}
+
+.highlight_02 {
+    background-color: yellowgreen;
+}
+
+#main {
+    background-color: azure;
+    padding: 50px;
+    margin: 100px;
+    box-shadow: #FFF 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px, red 0 -18px 40px, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+border-radius: 100px;
+}
+
+#gallery { display: flex; flex-wrap: wrap;   align-items: flex-start; row-gap: 30px; column-gap: 50px;}
+#gallery IMG { width: 300px}
+
+#gallery DIV { background: #c1fffd8b; padding: 30px; border-radius: 30px;}
+#gallery DIV P {background: none; padding: none; margin: none;}
+
+
+
+/* home page styles  */
+
+#pan-home { position: relative; height: 100vh ;
+background: url(images/fireanim.gif) repeat-x bottom ;
+}
+
+#chicken { position: absolute; bottom: 10px; left: 40%;} 
+
+#chicken2 { position: absolute; bottom: 50px; right: 10vw;}
+
+#chicken3 { position: absolute; bottom: 50px; left: 100px;}
+
+#homelink { position: absolute; top: 50px; right: 50px;}
+
+#homelink IMG { width: 40px;}
+
+.henny-penny-regular {
+  font-family: "Henny Penny", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter a collection</title>
+    <link rel="stylesheet" href="filter-collection.css">
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="filter-collection.js" defer></script>
+</head>
+<body>
+    <label for="shape-filter">Show</label>
+    <select id="shape-filter">
+        <option value="all">All</option>
+        <option value="circle">Circles</option>
+        <option value="square">Squares</option>
+    </select>
+    <p id="count" aria-live="polite"></p>
+    <div id="items"></div>
+</body>
+</html>

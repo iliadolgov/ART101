@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25. Control a sound · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>25. Control a sound</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p>Play starts or resumes the sound. Pause keeps its current position; Stop pauses and moves back to the beginning. The status follows the audio’s playback events.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame" id="live-example" src="control-sound.html" title="Live example: Control a sound"></iframe>
+                <a class="demo-link" href="control-sound.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">// jQuery returns a collection; [0] gets the audio element itself.
+let sound = $(&quot;#sound&quot;)[0];
+
+// .click(...) runs this function when Play is clicked.
+$(&quot;#play-button&quot;).click(function () {
+    sound.play(); // Start or resume from the current position.
+});
+
+$(&quot;#pause-button&quot;).click(function () {
+    sound.pause(); // Keep the current playback position.
+});
+
+$(&quot;#stop-button&quot;).click(function () {
+    sound.pause();
+    sound.currentTime = 0; // Playback positions are measured in seconds.
+    $(&quot;#status&quot;).text(&quot;Not playing.&quot;);
+});</code></pre></div>
+                
+            </section>
+        </div>
+        <p class="change-suggestion">Pause partway through the four ascending notes, then press Play and notice where playback continues. Repeat with Stop, then Play: the sound returns to the first note. Compare keeping the playback position with resetting it to zero.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/control-sound.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a> and <a href="tone.wav" download>tone.wav</a>, then open <strong>control-sound.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>control-sound.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full control-sound.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Control a sound&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;control-sound.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;control-sound.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;audio id=&quot;sound&quot; src=&quot;tone.wav&quot; preload=&quot;metadata&quot;&gt;&lt;/audio&gt;
+    &lt;div class=&quot;controls&quot;&gt;
+        &lt;button id=&quot;play-button&quot; type=&quot;button&quot;&gt;Play&lt;/button&gt;
+        &lt;button id=&quot;pause-button&quot; type=&quot;button&quot;&gt;Pause&lt;/button&gt;
+        &lt;button id=&quot;stop-button&quot; type=&quot;button&quot;&gt;Stop&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;p id=&quot;status&quot; aria-live=&quot;polite&quot;&gt;Not playing.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>control-sound.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full control-sound.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">* { box-sizing: border-box; }
+body { margin: 24px; font-family: Arial, sans-serif; color: #333; background: white; }
+p { line-height: 1.5; }
+button { padding: 10px 16px; border: 1px solid #888; background: #f7f7f5; font: inherit; cursor: pointer; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; }
+
+#status { margin-top: 24px; }</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>control-sound.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full control-sound.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">// jQuery returns a collection; [0] gets the audio element itself.
+let sound = $(&quot;#sound&quot;)[0];
+
+// .click(...) runs this function when Play is clicked.
+$(&quot;#play-button&quot;).click(function () {
+    sound.play(); // Start or resume from the current position.
+});
+
+$(&quot;#pause-button&quot;).click(function () {
+    sound.pause(); // Keep the current playback position.
+});
+
+$(&quot;#stop-button&quot;).click(function () {
+    sound.pause();
+    sound.currentTime = 0; // Playback positions are measured in seconds.
+    $(&quot;#status&quot;).text(&quot;Not playing.&quot;);
+});
+
+// These events report the audio&#x27;s state, not just a button click.
+$(&quot;#sound&quot;).on(&quot;playing&quot;, function () {
+    $(&quot;#status&quot;).text(&quot;Playing.&quot;);
+});
+$(&quot;#sound&quot;).on(&quot;pause&quot;, function () {
+    $(&quot;#status&quot;).text(&quot;Not playing.&quot;);
+});
+$(&quot;#sound&quot;).on(&quot;ended&quot;, function () {
+    $(&quot;#status&quot;).text(&quot;Finished.&quot;);
+});</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose a branch</title>
+    <link rel="stylesheet" href="choose-branch.css">
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="choose-branch.js" defer></script>
+</head>
+<body>
+    <p>Choose a branch, then choose where to continue.</p>
+    <!-- JavaScript fills both button containers from the branches object. -->
+    <div id="branches" class="controls"></div>
+    <div id="next-step">
+        <p id="next-heading"></p>
+        <div id="next-choices" class="controls"></div>
+    </div>
+    <p id="result" aria-live="polite"></p>
+</body>
+</html>

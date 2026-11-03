@@ -1,0 +1,36 @@
+body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+p { line-height: 1.5; }
+button { font: inherit; cursor: pointer; }
+
+#stamps { display: flex; gap: 12px; }
+.stamp { padding: 10px 16px; border: 1px solid #888; background: white; }
+
+/* Only the chosen stamp receives this class. */
+.stamp.selected { background: #deded8; outline: 2px solid #555; }
+
+#targets { display: flex; gap: 16px; margin: 24px 0; }
+.target {
+    width: 120px;
+    height: 130px;
+    border: 1px dashed #888;
+    background: #f7f7f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+.target:hover { background: #eeeeea; }
+.mark { width: 50px; height: 50px; border: 1px dotted #aaa; }
+
+/* Shape classes change the mark inside a target. */
+.mark.circle { border: 1px solid #666; border-radius: 50%; background: #8d8d86; }
+.mark.square { border: 1px solid #666; border-radius: 0; background: #8d8d86; }
+
+#result { min-height: 48px; }

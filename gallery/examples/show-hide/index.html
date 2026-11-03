@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1. Show and hide · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>1. Show and hide</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p>The element starts hidden because its CSS has <code>display: none</code>. Clicking Show runs <code>.show()</code>; clicking Hide runs <code>.hide()</code>. Both buttons act on the same element.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame" id="live-example" src="show-hide.html" title="Live example: Show and hide"></iframe>
+                <a class="demo-link" href="show-hide.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">// $(&quot;#show-button&quot;) selects the button by its HTML ID.
+// .click(...) runs this function each time that button is clicked.
+$(&quot;#show-button&quot;).click(function () {
+    // .show() makes #element visible, overriding its initial display: none.
+    $(&quot;#element&quot;).show();
+});
+
+// Run this function when the Hide button is clicked.
+$(&quot;#hide-button&quot;).click(function () {
+    // .hide() hides the element without removing it from the HTML.
+    $(&quot;#element&quot;).hide();
+});</code></pre></div>
+                
+            </section>
+        </div>
+        <p class="change-suggestion">Try replacing the text inside the element with an image. The same buttons will show and hide it.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/show-hide.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>show-hide.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>show-hide.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full show-hide.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Show and hide&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;show-hide.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;show-hide.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;Show the element, then hide it again.&lt;/p&gt;
+    &lt;div id=&quot;controls&quot;&gt;
+        &lt;button id=&quot;show-button&quot;&gt;Show&lt;/button&gt;
+        &lt;button id=&quot;hide-button&quot;&gt;Hide&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;stage&quot;&gt;
+        &lt;div id=&quot;element&quot;&gt;Here I am.&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>show-hide.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full show-hide.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+p { line-height: 1.5; }
+
+button {
+    padding: 10px 18px;
+    border: 1px solid #777;
+    border-radius: 3px;
+    background: #f2f2f0;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#controls { display: flex; gap: 10px; }
+
+/* Keep space for the element even while it is hidden. */
+#stage { margin-top: 28px; min-height: 110px; }
+
+#element {
+    display: none; /* The element starts hidden. */
+    padding: 30px;
+    border: 1px solid #888;
+    background: #e7e7e3;
+    text-align: center;
+}</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>show-hide.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full show-hide.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">// $(&quot;#show-button&quot;) selects the button by its HTML ID.
+// .click(...) runs this function each time that button is clicked.
+$(&quot;#show-button&quot;).click(function () {
+    // .show() makes #element visible, overriding its initial display: none.
+    $(&quot;#element&quot;).show();
+});
+
+// Run this function when the Hide button is clicked.
+$(&quot;#hide-button&quot;).click(function () {
+    // .hide() hides the element without removing it from the HTML.
+    $(&quot;#element&quot;).hide();
+});</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>

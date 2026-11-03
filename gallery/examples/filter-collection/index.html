@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18. Filter a collection · ART101 Interaction gallery</title>
+    <link rel="stylesheet" href="../../vendor/prism/prism.css">
+    <link rel="stylesheet" href="../../gallery.css">
+    <link rel="stylesheet" href="../../prism-light-modern.css">
+    <script src="../../vendor/prism/prism.js" defer></script>
+    <script src="../../gallery.js" defer></script>
+</head>
+<body>
+    <main>
+        <header class="gallery-header gallery-header-small">
+            <img class="gallery-logo" src="../../assets/logo.png" alt="" width="40" height="40">
+            <p class="gallery-title">ART101 Interaction gallery</p>
+        </header>
+        <a class="back-link" href="../../index.html">← All examples</a>
+        <h1>18. Filter a collection</h1>
+        <section class="explanation">
+            <h2>How it works</h2>
+            <p>Changing the filter rebuilds the display using matching <code>shape</code> values. All shows the full collection again. The visible count changes, but filtering never removes records from the <code>items</code> array.</p>
+        </section>
+        <div class="example-columns">
+            <section class="live-panel" aria-labelledby="example-heading">
+                <div class="panel-heading"><h2 id="example-heading">Example</h2><button class="quiet-button" id="restart-example" type="button">Restart</button></div>
+                <iframe class="live-frame content-frame" id="live-example" src="filter-collection.html" title="Live example: Filter a collection"></iframe>
+                <a class="demo-link" href="filter-collection.html" target="_blank" rel="noopener">Open example separately</a>
+            </section>
+            <section class="code-panel" aria-label="Key interaction">
+                <div class="panel-heading"><h2>Key interaction</h2><button class="quiet-button" data-copy="main-snippet" type="button" aria-label="Copy key interaction">Copy</button></div>
+                <p class="code-note">Code excerpt — <a href="#files-heading">full code below</a>.</p>
+                <div class="code-box"><pre><code id="main-snippet" class="language-javascript">// Every record stays in this array, even while it is hidden by a filter.
+let items = [
+    { name: &quot;A&quot;, shape: &quot;circle&quot; },
+    { name: &quot;B&quot;, shape: &quot;square&quot; },
+    { name: &quot;C&quot;, shape: &quot;circle&quot; },
+    { name: &quot;D&quot;, shape: &quot;square&quot; }
+];
+
+// filter receives &quot;all&quot;, &quot;circle&quot; or &quot;square&quot; from the selector.
+function showItems(filter) {
+    $(&quot;#items&quot;).empty();
+    let shownCount = 0;
+
+    for (let i = 0; i &lt; items.length; i = i + 1) {
+        let item = items[i];
+        // || means OR: show everything, or only the matching shape.
+        if (filter == &quot;all&quot; || item.shape == filter) {
+            let element = $(&quot;&lt;div class=&#x27;item&#x27;&gt;&lt;/div&gt;&quot;);
+            element.text(item.name);
+            // The shape value selects the CSS class for this item.
+            element.addClass(item.shape);
+            $(&quot;#items&quot;).append(element);
+            shownCount = shownCount + 1;
+        }
+    }
+    // Count the visible items separately from the unchanged array length.
+    $(&quot;#count&quot;).text(&quot;Showing &quot; + shownCount + &quot; of &quot; + items.length);
+}
+
+// .change(...) runs when a different option is selected.
+$(&quot;#shape-filter&quot;).change(function () {
+    // $(this) is the selector; .val() reads the selected value.
+    showItems($(this).val());
+});</code></pre></div>
+                
+            </section>
+        </div>
+        <p class="change-suggestion">Try adding <code>{ name: "E", shape: "circle" }</code> to <code>items</code>. It should appear under All and Circles, but not Squares.</p>
+        <section class="files" aria-labelledby="files-heading">
+            <div class="panel-heading"><h2 id="files-heading">Files</h2><a class="download-link" href="../../downloads/filter-collection.zip" download>Download all files</a></div>
+            <p class="files-note">Keep these files in one folder with <a href="jquery-3.7.1.min.js" download>jQuery</a>, then open <strong>filter-collection.html</strong>. The download includes everything.</p>
+            <section class="file"><div class="panel-heading"><h3>filter-collection.html</h3><button class="quiet-button" data-copy="full-html" type="button" aria-label="Copy full filter-collection.html">Copy</button></div><div class="code-box"><pre><code id="full-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Filter a collection&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;filter-collection.css&quot;&gt;
+    &lt;script src=&quot;jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;filter-collection.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;label for=&quot;shape-filter&quot;&gt;Show&lt;/label&gt;
+    &lt;select id=&quot;shape-filter&quot;&gt;
+        &lt;option value=&quot;all&quot;&gt;All&lt;/option&gt;
+        &lt;option value=&quot;circle&quot;&gt;Circles&lt;/option&gt;
+        &lt;option value=&quot;square&quot;&gt;Squares&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;p id=&quot;count&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+    &lt;div id=&quot;items&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>filter-collection.css</h3><button class="quiet-button" data-copy="full-css" type="button" aria-label="Copy full filter-collection.css">Copy</button></div><div class="code-box"><pre><code id="full-css" class="language-css">* { box-sizing: border-box; }
+body {
+    margin: 24px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+p { line-height: 1.5; }
+label { display: block; margin-bottom: 8px; }
+button, input, select { font: inherit; }
+button {
+    padding: 10px 16px;
+    border: 1px solid #888;
+    background: #f7f7f5;
+    cursor: pointer;
+}
+input, select { padding: 10px; border: 1px solid #888; max-width: 100%; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; }
+#message { min-height: 24px; margin: 12px 0; }
+
+#count { margin: 20px 0; }
+#items { display: flex; flex-wrap: wrap; gap: 12px; }
+.item { width: 64px; height: 64px; padding: 6px; display: flex; align-items: center; justify-content: center; border: 1px solid #888; background: #e7e7e3; overflow-wrap: anywhere; text-align: center; }
+.circle { border-radius: 50%; }</code></pre></div></section>
+<section class="file"><div class="panel-heading"><h3>filter-collection.js</h3><button class="quiet-button" data-copy="full-js" type="button" aria-label="Copy full filter-collection.js">Copy</button></div><div class="code-box"><pre><code id="full-js" class="language-javascript">// Every record stays in this array, even while it is hidden by a filter.
+let items = [
+    { name: &quot;A&quot;, shape: &quot;circle&quot; },
+    { name: &quot;B&quot;, shape: &quot;square&quot; },
+    { name: &quot;C&quot;, shape: &quot;circle&quot; },
+    { name: &quot;D&quot;, shape: &quot;square&quot; }
+];
+
+// filter receives &quot;all&quot;, &quot;circle&quot; or &quot;square&quot; from the selector.
+function showItems(filter) {
+    $(&quot;#items&quot;).empty();
+    let shownCount = 0;
+
+    for (let i = 0; i &lt; items.length; i = i + 1) {
+        let item = items[i];
+        // || means OR: show everything, or only the matching shape.
+        if (filter == &quot;all&quot; || item.shape == filter) {
+            let element = $(&quot;&lt;div class=&#x27;item&#x27;&gt;&lt;/div&gt;&quot;);
+            element.text(item.name);
+            // The shape value selects the CSS class for this item.
+            element.addClass(item.shape);
+            $(&quot;#items&quot;).append(element);
+            shownCount = shownCount + 1;
+        }
+    }
+    // Count the visible items separately from the unchanged array length.
+    $(&quot;#count&quot;).text(&quot;Showing &quot; + shownCount + &quot; of &quot; + items.length);
+}
+
+// .change(...) runs when a different option is selected.
+$(&quot;#shape-filter&quot;).change(function () {
+    // $(this) is the selector; .val() reads the selected value.
+    showItems($(this).val());
+});
+
+showItems(&quot;all&quot;);</code></pre></div></section>
+
+        </section>
+    </main>
+</body>
+</html>
