@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an item from input</title>
+    <link rel="stylesheet" href="garden.css">
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="garden.js" defer></script>
+</head>
+<body>
+    <label for="item-label">Creature's name</label>
+    <div class="controls">
+        <input id="item-label" type="text" autocomplete="off">
+        <button id="add-button" type="button">Let it roam</button>
+    </div>
+
+        <div>
+            <label for="object-color">Color</label>
+            <input id="object-color" type="color" value="#d9d9d3">
+        </div>
+
+    <div id="object">color test</div>
+
+    <p id="message" aria-live="polite"></p>
+    <ul id="items" aria-live="polite"></ul>
+</body>
+</html>
