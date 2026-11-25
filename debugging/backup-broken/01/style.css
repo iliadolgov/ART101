@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  color: #243329;
+  background: #fffdf8;
+}
+main { max-width: 900px; margin: 0 auto; }
+h1 { font-size: 2rem; }
+.controls { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem; }
+input, button { font: inherit; padding: 0.6rem 0.8rem; }
+input { width: 160px; border: 1px solid #718471; border-radius: 4px; }
+button { cursor: pointer; border: 1px solid #49624c; border-radius: 4px; }
+#crAdd { background: #365b3d; color: white; }
+#reset { background: white; color: #243329; }
+#garden { background-color: #f3f1e8; padding: 1.5rem; border-radius: 8px; min-height: 220px; }
+#message { margin-top: 0; font-size: 1.1rem; }
+#creature-list { display: flex; flex-wrap: wrap; gap: 1rem; }
+.creature {
+  min-width: 5rem;
+  padding: 1.5rem;
+  border-radius: 50% 50% 1rem 1rem;
+  background-color: #90be6d;
+  color: #203019;
+  text-align: center;
+  overflow-wrap: anywhere;
+}

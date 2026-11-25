@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Small Creature Garden</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Small Creature Garden</h1>
+    <p>Give a creature a name and add it to the garden.</p>
+    <div class="controls">
+      <label for="crName">Name</label>
+      <input id="crName" type="text" value="Moss">
+      <button id="crAdd" type="button">Add creature</button>
+      <button id="reset" type="button">Start again</button>
+    </div>
+    <p>Creatures: <span id="count">0</span></p>
+    <section id="garden" aria-label="Creature garden">
+      <p id="message">The garden is empty.</p>
+      <div id="creature-list"></div>
+    </section>
+  </main>
+  <script src="jquery-3.7.1.min.js"></script>
+  <script src="gardens.js"></script>
+</body>
+</html>

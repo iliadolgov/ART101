@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Garden debugging demonstrations | ART101 instructor notes</title>
+<style>
+:root{color-scheme:light;--ink:#1d3025;--muted:#475c50;--leaf:#25563e;--paper:#f5f6ef;--card:#fffefa;--rule:#ced8cc}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--paper);color:var(--ink);font:1.06rem/1.62 system-ui,-apple-system,sans-serif;overflow-wrap:anywhere}main{max-width:48rem;margin:auto;padding:0 clamp(1rem,4vw,2.25rem) 2.5rem}
+header{padding:clamp(2rem,9vw,4.5rem) 0 1.25rem;border-bottom:1px solid var(--rule)}.eyebrow,.label{font-size:.77rem;letter-spacing:.11em;font-weight:750;text-transform:uppercase}.eyebrow{color:var(--leaf);margin:0 0 .65rem}h1,h2{font-family:Georgia,serif;line-height:1.12;letter-spacing:-.025em}h1{font-size:clamp(2.3rem,9vw,4.25rem);margin:0;max-width:13ch}h2{font-size:clamp(1.55rem,6vw,2.25rem);margin:0 0 .8rem}h3{font-size:1.04rem;margin:1.25rem 0 .45rem}.lede{color:var(--muted);max-width:58ch;margin:.95rem 0 0}
+nav,section,details{background:var(--card);border:1px solid var(--rule);border-radius:1rem;padding:clamp(1rem,4vw,1.6rem);margin:1rem 0;min-width:0;scroll-margin-top:1rem}nav p{margin:0;font-weight:700}nav ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:0 .8rem}nav li{margin:0}nav a{display:flex;align-items:center;min-height:44px;border-bottom:1px solid #e5ece3}
+a{color:var(--leaf);text-underline-offset:.18em}a:focus-visible,pre:focus-visible,summary:focus-visible{outline:2px solid #49795f;outline-offset:3px}p{margin:.7rem 0}li+li{margin-top:.35rem}section :is(ol,ul){padding-left:1.5rem}
+.prompt,.takeaway{background:#e9f0e6;padding:.65rem .8rem}.prompt{border-left:3px solid #628d72;font-weight:650}.takeaway{border-radius:.55rem;margin-top:1.15rem}.takeaway strong{display:block;color:var(--leaf);font-size:.86rem}
+.states{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));gap:.55rem}.states div{padding:.55rem .7rem;border-radius:.5rem;border:1px solid #20352822}.states dt{font-weight:700}.states dd{margin:0}.states small{display:block;color:#394e43}.empty{background:#f3f1e8}.quiet{background:#e3efda}.lively{background:#fff0bb}.crowded{background:#f5d4dd}
+.snippet{background:#203129;color:#f4f7ee;border-radius:.6rem;margin:.9rem 0 1.1rem;overflow:hidden}.label{color:#c2d9cb;border-bottom:1px solid #455c50;padding:.38rem .8rem}pre{margin:0;padding:.75rem .8rem;overflow-x:auto;white-space:pre;overflow-wrap:normal;font:.88rem/1.58 ui-monospace,SFMono-Regular,Menlo,monospace;tab-size:2}pre:focus-visible{outline-offset:-3px}code{font:inherit}
+details{padding-block:.5rem}summary{cursor:pointer;min-height:44px;padding:.55rem 0;font-weight:720}details[open]{padding-bottom:1rem}.back{min-height:44px;display:inline-flex;align-items:center;color:var(--muted);font-size:.9rem}footer{font-size:.85rem;color:var(--muted)}.skip{position:absolute;left:1rem;top:-10rem}.skip:focus{top:1rem;background:white;padding:.45rem}
+@media print{body{background:white;color:black}main{padding:0;max-width:none}nav,.back,.skip{display:none}section,details{border:0;padding:0}.snippet{background:#eee;color:#111}.label{color:#303030}pre{white-space:pre-wrap}}
+</style>
+</head>
+<body>
+<a class="skip" href="#contents">Skip to contents</a>
+<main>
+<header><p class="eyebrow">ART101 · Instructor notes</p><h1>Garden debugging demonstrations</h1><p class="lede">The five strategies and their order stay fixed. All five use the same Garden. Each demonstration introduces one fault into a fresh working copy, so faults do not accumulate.</p></header>
+<nav id="contents" aria-label="Contents"><p>On this page</p><ul><li><a href="#start">Start with the working page</a></li><li><a href="#foundations">1. Check the foundations</a></li><li><a href="#evidence">2. Read the evidence</a></li><li><a href="#narrow">3. Narrow down the problem</a></li><li><a href="#inspect">4. Inspect what actually happens</a></li><li><a href="#compare">5. Simplify and compare</a></li><li><a href="#team">Team practice</a></li><li><a href="#files">Files and use</a></li><li><a href="#working-js">Working JavaScript</a></li><li><a href="#working-html">Working HTML</a></li><li><a href="#sources">Teaching sources and status</a></li></ul></nav>
+<p>The code follows the verified class style: let variables; .click(function () { ... }); familiar if / else conditions; concatenated HTML strings passed directly to .append(); .html() for output; selector-based .css(). There are no custom data objects, helper functions, detached jQuery element variables or const declarations. The reset button has its own short click handler.</p>
+<section id="start" aria-labelledby="start-heading"><h2 id="start-heading">Start with the working page</h2><p>Show 00-working/index.html before handing out the broken copies. Add six named creatures and use Start again once, then add another creature.</p>
+<dl class="states">
+<div class="empty"><dt>0, on opening or reset</dt><dd>The garden is empty.<small>Cream</small></dd></div>
+<div class="quiet"><dt>1–2</dt><dd>A quiet garden.<small>Pale green</small></dd></div>
+<div class="lively"><dt>3–5</dt><dd>The garden is getting lively.<small>Warm yellow</small></dd></div>
+<div class="crowded"><dt>6+</dt><dd>It's getting crowded here.<small>Pink</small></dd></div>
+</dl>
+<p>Each click adds one named creature and increases the count. Start again removes all creatures, sets count to 0 and restores the opening message and background. The next addition must start from 1. Use simple, non-empty names for this bounded exercise; input validation is not an additional lesson here.</p>
+<p>The shared routine is: reproduce the problem → test one explanation → change one thing → repeat the original test. When a condition or reset is involved, test across its boundary and after restarting.</p><a class="back" href="#contents">Back to contents ↑</a></section><section id="foundations" aria-labelledby="foundations-heading"><h2 id="foundations-heading">1. Check the foundations</h2><p class="prompt">“Am I testing the right files, and did everything load?”</p>
+<p>Open 01/index.html. Both buttons do nothing. The page itself looks normal.</p>
+<p>The HTML points to a file that does not exist:</p>
+<div class="snippet"><div class="label">HTML</div><pre tabindex="0" aria-label="HTML code"><code>&lt;script src="gardens.js"&gt;&lt;/script&gt;</code></pre></div>
+<h3>Walkthrough</h3>
+<ol start="1">
+<li>Enter Moss and click Add creature. Try Start again too: neither action responds.</li>
+<li>Check the browser address against the folder open in VS Code. Save and reload.</li>
+<li>Open Console and reload. Read the failed gardens.js request. If useful, find the same request in Network after reloading.</li>
+<li>Compare the requested path with the actual garden.js filename.</li>
+<li>Correct the script link, save and reload. Add creatures and test reset.</li>
+</ol>
+<p class="takeaway"><strong>Takeaway</strong> check that the code reached the browser before investigating its logic. A local file may report a missing file rather than an HTTP 404; the evidence is the failed path, not one exact message.</p><a class="back" href="#contents">Back to contents ↑</a></section><section id="evidence" aria-labelledby="evidence-heading"><h2 id="evidence-heading">2. Read the evidence</h2><p class="prompt">“What exactly is the browser telling me?”</p>
+<p>Open 02/index.html. Add creature produces no visible creature and a ReferenceError.</p>
+<p>The name variable is misspelled when building the HTML:</p>
+<div class="snippet"><div class="label">JavaScript</div><pre tabindex="0" aria-label="JavaScript code"><code>let crName = $("#crName").val();
+// Other existing statements remain here.
+let crHtml = "&lt;div class='creature'&gt;" + crNmae + "&lt;/div&gt;";</code></pre></div>
+<h3>Walkthrough</h3>
+<ol start="1">
+<li>Open Console and click Add creature.</li>
+<li>Read “crNmae is not defined.” Follow its file and line reference.</li>
+<li>Compare crNmae with the declaration crName near the top of the handler.</li>
+<li>Correct the spelling. Save and reload to clear the effects of the failed attempt.</li>
+<li>Repeat the action. Confirm a creature appears, the count becomes 1 and the error is gone.</li>
+</ol>
+<p class="takeaway"><strong>Takeaway</strong> the message narrows the search. A reported line shows where execution encountered a problem; its cause can be earlier. Here count has already increased internally before the exception, so reloading before the verification matters.</p><a class="back" href="#contents">Back to contents ↑</a></section><section id="narrow" aria-labelledby="narrow-heading"><h2 id="narrow-heading">3. Narrow down the problem</h2><p class="prompt">“Where does the expected behaviour stop?”</p>
+<p>Open 03/index.html. The count, message and background change, but no creatures appear. There is no JavaScript error.</p>
+<p>The append statement selects a misspelled ID:</p>
+<div class="snippet"><div class="label">JavaScript</div><pre tabindex="0" aria-label="JavaScript code"><code>$("#creature-lsit").append(crHtml);</code></pre></div>
+<p>Divide the handler into four sections: input and count; mood decision; HTML construction; page update. Add these checkpoints in the existing code, rather than replacing the code with logs:</p>
+<div class="snippet"><div class="label">JavaScript</div><pre tabindex="0" aria-label="JavaScript code"><code>// After reading the name and increasing count:
+console.log("1: input and count", crName, count);
+
+// After the complete if / else block:
+console.log("2: decision", message, gardenColor);
+
+// After building crHtml:
+console.log("3: HTML", crHtml);
+
+// Immediately after the append statement:
+console.log("4: append line passed");</code></pre></div>
+<h3>Walkthrough</h3>
+<ol start="1">
+<li>Add creatures and identify what already works: count, mood message and background.</li>
+<li>Add the checkpoints, save, reload and click again. Read the name, count, chosen message/colour and HTML string.</li>
+<li>Since those values are correct, concentrate on the statement that puts the HTML into the page.</li>
+<li>Explain that passing that statement does not prove its selector found anything. In Console, compare:</li>
+</ol>
+<div class="snippet"><div class="label">JavaScript</div><pre tabindex="0" aria-label="JavaScript code"><code>$("#creature-lsit").length  // 0
+$("#creature-list").length  // 1</code></pre></div>
+<ol start="5">
+<li>Compare with the HTML's id="creature-list", correct the selector, remove the logs and reload.</li>
+<li>Add three creatures: their number must match the count, and the third must change the mood.</li>
+</ol>
+<p class="takeaway"><strong>Takeaway</strong> confirm sections, then narrow the search. A valid jQuery selector can match no elements without throwing an error. Keep the program intact while checking it; removing arbitrary chunks can create new missing-variable errors.</p><a class="back" href="#contents">Back to contents ↑</a></section><section id="inspect" aria-labelledby="inspect-heading"><h2 id="inspect-heading">4. Inspect what actually happens</h2><p class="prompt">“What are the values, and which instructions actually run?”</p>
+<p>Open 04/index.html. The garden stays quiet after the third addition and becomes lively only on the fourth. The expected transition is at 3.</p>
+<p>The first condition includes 3 by mistake:</p>
+<div class="snippet"><div class="label">JavaScript</div><pre tabindex="0" aria-label="JavaScript code"><code>if (count &lt;= 3) {
+  message = "A quiet garden.";
+  gardenColor = "#e3efda";
+}</code></pre></div>
+<h3>Walkthrough</h3>
+<ol start="1">
+<li>Add creatures through the fourth to reproduce the late transition. Reset.</li>
+<li>With DevTools open, insert debugger; immediately before the first if statement, save and reload:</li>
+</ol>
+<div class="snippet"><div class="label">JavaScript</div><pre tabindex="0" aria-label="JavaScript code"><code>let message = "";
+let gardenColor = "";
+debugger;
+if (count &lt;= 3) {</code></pre></div>
+<ol start="3">
+<li>Add the first two creatures, using Resume when the debugger pauses.</li>
+<li>On the third click, inspect count in Scope: it is 3. Ask which message should be selected now.</li>
+<li>Use Step over to follow the condition. Observe that execution enters the quiet-garden branch. Step through its assignments and inspect message and gardenColor.</li>
+<li>Compare count &lt;= 3 with the intended count &lt; 3. Correct the operator.</li>
+<li>Remove debugger;, save and reload. Check counts 2, 3, 5 and 6, then reset and add one more.</li>
+</ol>
+<p>If the pause initially highlights debugger itself, step to the if statement before following the condition. The highlighted statement is the next one to execute; step past an assignment before expecting its new value. Use Step over, not Step into, when passing jQuery calls.</p>
+<p class="takeaway"><strong>Takeaway</strong> a program can run without errors and still take the wrong path. The debugger exposes both its values and the path it takes. This replaces the earlier short-counter reset fault with a boundary fault that uses the accepted longer program; the strategy stays the same.</p><a class="back" href="#contents">Back to contents ↑</a></section><section id="compare" aria-labelledby="compare-heading"><h2 id="compare-heading">5. Simplify and compare</h2><p class="prompt">“Does this part work with a known, simple input?”</p>
+<p>Open 05/index.html. On the first and second additions, names, count and the quiet-garden message work, but the garden remains cream. The other mood colours work.</p>
+<p>The quiet-garden colour is missing its #:</p>
+<div class="snippet"><div class="label">JavaScript</div><pre tabindex="0" aria-label="JavaScript code"><code>gardenColor = "e3efda";</code></pre></div>
+<h3>Walkthrough</h3>
+<ol start="1">
+<li>Reload and add one creature to reproduce the missing pale-green background.</li>
+<li>Temporarily replace the existing colour update with a known valid value:</li>
+</ol>
+<div class="snippet"><div class="label">JavaScript</div><pre tabindex="0" aria-label="JavaScript code"><code>$("#garden").css("background-color", "red");</code></pre></div>
+<ol start="3">
+<li>Save, reload and add one creature. The garden turns red, showing that the selector and CSS-setting operation work.</li>
+<li>Just before that line, inspect the original value:</li>
+</ol>
+<div class="snippet"><div class="label">JavaScript</div><pre tabindex="0" aria-label="JavaScript code"><code>console.log("colour received:", gardenColor);</code></pre></div>
+<ol start="5">
+<li>Compare e3efda with the valid CSS colour #e3efda. Correct the assignment in the quiet-garden branch.</li>
+<li>Restore the original variable-based update and remove the log:</li>
+</ol>
+<div class="snippet"><div class="label">JavaScript</div><pre tabindex="0" aria-label="JavaScript code"><code>$("#garden").css("background-color", gardenColor);</code></pre></div>
+<ol start="7">
+<li>Reload and test all three moods, then reset. The opening background must also return.</li>
+</ol>
+<p class="takeaway"><strong>Takeaway</strong> temporarily supplying a known valid value separates the code using a value from the code supplying it. Red was an experiment; restoring the variable and testing every mood completes the repair.</p><a class="back" href="#contents">Back to contents ↑</a></section><section id="team" aria-labelledby="team-heading"><h2 id="team-heading">Team practice</h2><p>The team-challenge folder uses the same page with several faults together. Give teams that folder and its README, without these instructor notes or the working answer.</p>
+<p>One person edits while teammates propose explanations and checks; switch the keyboard after a repair. Keep the emphasis on choosing a useful check, making one change and verifying it. At the end, ask teams to show one clue that helped them locate a problem.</p>
+<p>The README supplies intended behaviour, including the third and sixth additions and the first addition after reset. It does not identify the planted faults.</p>
+<h3>Instructor key — three faults</h3>
+<ol start="1">
+<li>The message update selects #mesage rather than #message. Repair the selector.</li>
+<li>The lively branch uses count &lt; 7 rather than count &lt; 6. Correct the boundary; the sixth creature should make the garden crowded.</li>
+<li>Reset clears the visible count to 0 but leaves the count variable unchanged. Restore count = 0 at the beginning of the reset handler. Using .html(count) again keeps the display explicitly tied to that variable.</li>
+</ol>
+<p>These faults do not prevent the whole script from running. Teams can investigate them in different orders. The working baseline is the answer key; no new submission or grading requirement is added.</p><a class="back" href="#contents">Back to contents ↑</a></section><section id="files" aria-labelledby="files-heading"><h2 id="files-heading">Files and use</h2><ul>
+<li>00-working: the complete working Garden and repair reference.</li>
+<li>01–05: the five separate broken demonstrations in the fixed strategy order.</li>
+<li>team-challenge: the combined team exercise and student-facing expected behaviour.</li>
+<li>instructor-notes.md: a copy of this guide inside the package.</li>
+</ul>
+<p>Every exercise folder contains index.html, style.css, garden.js and the official jQuery 3.7.1 file. Extract the ZIP first, then open a folder's index.html in the browser and its garden.js in VS Code. The exercises work locally without a server or internet connection. Keep the whole selected exercise folder together.</p>
+<p>The distributed broken pages contain their ordinary code and section comments, but no comments identifying the planted errors. Diagnostic logs and debugger; are added during the demonstrations, not preinserted.</p><a class="back" href="#contents">Back to contents ↑</a></section><details open id="working-js"><summary>Working JavaScript</summary><div class="snippet"><div class="label">JavaScript</div><pre tabindex="0" aria-label="JavaScript code"><code>let count = 0;
+
+$("#crAdd").click(function () {
+  // Read the input and update the count.
+  let crName = $("#crName").val();
+  count = count + 1;
+
+  // Decide how the garden should respond.
+  let message = "";
+  let gardenColor = "";
+
+  if (count &lt; 3) {
+    message = "A quiet garden.";
+    gardenColor = "#e3efda";
+  } else if (count &lt; 6) {
+    message = "The garden is getting lively.";
+    gardenColor = "#fff0bb";
+  } else {
+    message = "It's getting crowded here.";
+    gardenColor = "#f5d4dd";
+  }
+
+  // Build the HTML and update the page.
+  let crHtml = "&lt;div class='creature'&gt;" + crName + "&lt;/div&gt;";
+  $("#creature-list").append(crHtml);
+  $("#count").html(count);
+  $("#message").html(message);
+  $("#garden").css("background-color", gardenColor);
+});
+
+$("#reset").click(function () {
+  count = 0;
+  $("#creature-list").html("");
+  $("#count").html(count);
+  $("#message").html("The garden is empty.");
+  $("#garden").css("background-color", "#f3f1e8");
+});</code></pre></div></details><details open id="working-html"><summary>Working HTML</summary><div class="snippet"><div class="label">HTML</div><pre tabindex="0" aria-label="HTML code"><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;Small Creature Garden&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main&gt;
+    &lt;h1&gt;Small Creature Garden&lt;/h1&gt;
+    &lt;p&gt;Give a creature a name and add it to the garden.&lt;/p&gt;
+    &lt;div class="controls"&gt;
+      &lt;label for="crName"&gt;Name&lt;/label&gt;
+      &lt;input id="crName" type="text" value="Moss"&gt;
+      &lt;button id="crAdd" type="button"&gt;Add creature&lt;/button&gt;
+      &lt;button id="reset" type="button"&gt;Start again&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;p&gt;Creatures: &lt;span id="count"&gt;0&lt;/span&gt;&lt;/p&gt;
+    &lt;section id="garden" aria-label="Creature garden"&gt;
+      &lt;p id="message"&gt;The garden is empty.&lt;/p&gt;
+      &lt;div id="creature-list"&gt;&lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+  &lt;script src="jquery-3.7.1.min.js"&gt;&lt;/script&gt;
+  &lt;script src="garden.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></details><section id="sources" aria-labelledby="sources-heading"><h2 id="sources-heading">Teaching sources and status</h2><p>The coding patterns were checked in this conversation against Lecture 12 slide 13, Lecture 13 slide 9, Lab 4 and the instructor's ex04.js clicker: let declarations, .click(), concatenated HTML, .append(), .html() and selector-based .css(). The added population conditions follow the clicker's count-dependent responses. Lab 7 supplies the Console, one-change-at-a-time testing and debugging/refactoring distinction. Lecture 14 slide 22 mentions debugger;.</p>
+<p>References: <a href="https://developer.chrome.com/docs/devtools/javascript/">https://developer.chrome.com/docs/devtools/javascript/</a> and <a href="https://developer.chrome.com/docs/devtools/javascript/breakpoints">https://developer.chrome.com/docs/devtools/javascript/breakpoints</a></p>
+<p>The five-strategy series, class coding style and population/reset extension are instructor-approved. This guide implements them; it adds no course policy, grading requirement or publication. GitHub collaboration remains a separate part of the class. The old short version remains in the document's version history.</p>
+<p>Validation: Automated DOM/JavaScript checks using jsdom 26.1.0 and the bundled official jQuery 3.7.1 passed for the working page, each planted fault, every specified repair, the known-red diagnostic experiment, and all three team faults and repairs. Checks covered the opening state, counts 1–7, all mood colours/messages, reset, and the first addition after reset. The debugger example's values and branch result were checked. Chromium could not launch in this environment, so visual browser rendering and the live Chrome DevTools pause/step workflow remain unverified. Rehearse that walkthrough before class.</p><a class="back" href="#contents">Back to contents ↑</a></section>
+<footer>Instructor notes revised 16 November 2026.</footer>
+</main>
+</body>
+</html>
